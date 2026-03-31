@@ -10,7 +10,7 @@ Move across the grid to avoid incoming attacks. Each attack is telegraphed befor
 Your goals:
 - 🧭 Stay alive as long as possible  
 - 💰 Collect gold coins scattered across the arena  
-- 📈 Push your score higher with every second survived  
+- 📈 Push your score higher with attack successfully dodged
 
 ## 🎥 Demo
 
