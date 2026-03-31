@@ -15,7 +15,7 @@ Your goals:
 ## 🎥 Demo
 
 <p align="center">
-  <img src="demo.gif" />
+  <img src="demo.gif" alt="Gameplay Demo" width="400"/>
 </p>
 
 ## 🛠️ Technical Overview
