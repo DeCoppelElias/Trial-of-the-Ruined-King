@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8df27eb31cf8344a84c5276c3703cc, type: 3}
+  m_Name: Hammer Attack Definition
+  m_EditorClassIdentifier: GamePresentation::HammerAttackDefinition
+  attackTiming:
+    TelegraphDuration: 2.5
+    CommitDuration: 0.2
+    ImpactDuration: 0.1
+    RecoveryDuration: 1
+  visualConfig:
+    HammerPrefab: {fileID: 2258520135537064600, guid: 7d704080d17b8894590270b6d5bbf94c, type: 3}
+    InitialScale: {x: 1, y: 1, z: 1}
+    FinalScale: {x: 3, y: 3, z: 3}
+    ArenaShakeDuration: 0.2
+    ArenaShakeMagnitude: 0.05
+    TelegraphStartOffsetX: 3
+    TelegraphEndOffsetX: 1.5
+    TelegraphOffsetY: 0.5
+  audioConfig:
+    HammerSlam: {fileID: 11400000, guid: a07dfbbe56a0e734881ff7d63b59bee3, type: 2}
+    CommitAudio: {fileID: 11400000, guid: cd7474074e50f854da0022724d52d46b, type: 2}

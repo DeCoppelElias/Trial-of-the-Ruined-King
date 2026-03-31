@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6817d486cf675374ebc169a3be65fdd1, type: 3}
+  m_Name: Spear Column Attack Definition
+  m_EditorClassIdentifier: GamePresentation::SpearColumnAttackDefinition
+  attackTiming:
+    TelegraphDuration: 1
+    CommitDuration: 0.4
+    ImpactDuration: 0
+    RecoveryDuration: 0
+  visualConfig:
+    SpearPrefab: {fileID: 1459104249854608636, guid: 08fae5de49557fb40aa438d2b3cdb130, type: 3}
+    SpearGroundY: 0
+    SpearChargeY: 0.5
+  audioConfig:
+    SpearWhooshAudioEvent: {fileID: 11400000, guid: ff2f58c82c77e8a4d93633237c99a7be, type: 2}
+    CommitAudioEvent: {fileID: 11400000, guid: cd7474074e50f854da0022724d52d46b, type: 2}

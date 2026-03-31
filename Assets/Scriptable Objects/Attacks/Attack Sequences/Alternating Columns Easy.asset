@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833ee171d2ab8a546b7852967b308a2d, type: 3}
+  m_Name: Alternating Columns Easy
+  m_EditorClassIdentifier: Gameplay::AttackSequenceDefinition
+  sequenceName: Alternating Column Easy
+  description: Columns are hit in an alternating way.
+  steps:
+  - attackType: 1
+    delayFromStart: 0
+    parameters:
+      rid: 3798220545572471199
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 1
+    delayFromStart: 0
+    parameters:
+      rid: 3798220545572471200
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 1
+    delayFromStart: 1
+    parameters:
+      rid: 3798220545572471201
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 1
+    delayFromStart: 2
+    parameters:
+      rid: 3798220545572471202
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 1
+    delayFromStart: 2
+    parameters:
+      rid: 3798220545572471203
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  baseAttackTiming:
+    TelegraphDuration: 1
+    CommitDuration: 0.4
+    ImpactDuration: 0
+    RecoveryDuration: 0
+  difficultyRating: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 3798220545572471199
+      type: {class: SpearColumnParameters, ns: , asm: Gameplay}
+      data:
+        column: 0
+        columnDirection: 0
+    - rid: 3798220545572471200
+      type: {class: SpearColumnParameters, ns: , asm: Gameplay}
+      data:
+        column: 2
+        columnDirection: 0
+    - rid: 3798220545572471201
+      type: {class: SpearColumnParameters, ns: , asm: Gameplay}
+      data:
+        column: 1
+        columnDirection: 0
+    - rid: 3798220545572471202
+      type: {class: SpearColumnParameters, ns: , asm: Gameplay}
+      data:
+        column: 0
+        columnDirection: 0
+    - rid: 3798220545572471203
+      type: {class: SpearColumnParameters, ns: , asm: Gameplay}
+      data:
+        column: 2
+        columnDirection: 0

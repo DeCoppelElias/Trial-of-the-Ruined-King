@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833ee171d2ab8a546b7852967b308a2d, type: 3}
+  m_Name: Bottom To Top Easy
+  m_EditorClassIdentifier: Gameplay::AttackSequenceDefinition
+  sequenceName: Bottom To Top Easy
+  description: 
+  steps:
+  - attackType: 0
+    delayFromStart: 0
+    parameters:
+      rid: 3798220545572471208
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 0
+    delayFromStart: 0.5
+    parameters:
+      rid: 3798220545572471209
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 0
+    delayFromStart: 1
+    parameters:
+      rid: 3798220545572471210
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 0
+    delayFromStart: 1.5
+    parameters:
+      rid: 3798220545572471211
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  baseAttackTiming:
+    TelegraphDuration: 1
+    CommitDuration: 0.4
+    ImpactDuration: 0
+    RecoveryDuration: 0
+  difficultyRating: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 3798220545572471208
+      type: {class: SpearRowParameters, ns: , asm: Gameplay}
+      data:
+        row: 0
+        rowDirection: 0
+    - rid: 3798220545572471209
+      type: {class: SpearRowParameters, ns: , asm: Gameplay}
+      data:
+        row: 1
+        rowDirection: 1
+    - rid: 3798220545572471210
+      type: {class: SpearRowParameters, ns: , asm: Gameplay}
+      data:
+        row: 2
+        rowDirection: 0
+    - rid: 3798220545572471211
+      type: {class: SpearRowParameters, ns: , asm: Gameplay}
+      data:
+        row: 3
+        rowDirection: 1

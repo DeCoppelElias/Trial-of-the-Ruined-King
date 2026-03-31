@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833ee171d2ab8a546b7852967b308a2d, type: 3}
+  m_Name: Hammer Corner Top Right Easy
+  m_EditorClassIdentifier: Gameplay::AttackSequenceDefinition
+  sequenceName: Hammer Corner Top Right Easy
+  description: 
+  steps:
+  - attackType: 2
+    delayFromStart: 0
+    parameters:
+      rid: 3798220545572471226
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 2
+    delayFromStart: 0.5
+    parameters:
+      rid: 3798220545572471228
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  - attackType: 2
+    delayFromStart: 1
+    parameters:
+      rid: 3798220545572471227
+    overrideTiming: 0
+    timingOverride:
+      TelegraphDuration: 0
+      CommitDuration: 0
+      ImpactDuration: 0
+      RecoveryDuration: 0
+  baseAttackTiming:
+    TelegraphDuration: 2.5
+    CommitDuration: 0.2
+    ImpactDuration: 0.1
+    RecoveryDuration: 1
+  difficultyRating: 5
+  references:
+    version: 2
+    RefIds:
+    - rid: 3798220545572471226
+      type: {class: HammerParameters, ns: , asm: Gameplay}
+      data:
+        hammerPosition:
+          GridX: 0
+          GridY: 0
+        hammerDirection: 0
+    - rid: 3798220545572471227
+      type: {class: HammerParameters, ns: , asm: Gameplay}
+      data:
+        hammerPosition:
+          GridX: 0
+          GridY: 2
+        hammerDirection: 0
+    - rid: 3798220545572471228
+      type: {class: HammerParameters, ns: , asm: Gameplay}
+      data:
+        hammerPosition:
+          GridX: 2
+          GridY: 1
+        hammerDirection: 1
