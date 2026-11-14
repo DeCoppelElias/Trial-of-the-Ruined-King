@@ -54,6 +54,12 @@ tests from the Test Runner window. From a terminal, close the editor first.
 Keep `-nographics`. Without it the Unity Version Control plugin opens a login
 dialog nobody can see, and the run hangs forever.
 
+Wait on the Unity process itself, not on its output. The AI Assistant package
+starts `relay_win.exe`, which outlives Unity and keeps its output pipe open, so
+a shell that pipes or captures Unity's output never returns. In PowerShell,
+start Unity with `Start-Process -PassThru`, call `WaitForExit()` on the result,
+then stop any `relay_win` process left behind.
+
 Tests in category `KnownBug` are expected to fail until their bug is fixed.
 Tests in `DesignQuestion` show behaviour that may or may not be intended.
 "The tests pass" means both suites pass with those two categories left out.
