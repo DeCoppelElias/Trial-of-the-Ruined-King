@@ -1,6 +1,6 @@
 # Version control
 
-Status: not started.
+Status: done.
 
 Builds the [version control](../ideas/version-control.md) idea. Its grill
 settles the `version-control` decision, then the code changes to follow it
