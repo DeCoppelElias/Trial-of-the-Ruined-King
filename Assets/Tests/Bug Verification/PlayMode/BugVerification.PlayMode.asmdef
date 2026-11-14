@@ -7,7 +7,8 @@
         "Shared",
         "Gameplay",
         "GamePresentation",
-        "Bootstrap"
+        "Bootstrap",
+        "BugVerification.Shared"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

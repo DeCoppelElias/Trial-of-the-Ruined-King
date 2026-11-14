@@ -36,9 +36,7 @@ From the attack system review:
 - [Frame rate independence](frame-rate-independence.md): same timing at any frame rate.
 
 Architecture topics, each grilled on its own to settle a decision and bring the
-code in line. Grill in this order: version control, ports and adapters,
-testing, game clock, randomness, domain events, composition root, game state,
-grid arena, attack lifecycle.
+code in line. The [roadmap](../roadmap/README.md) holds the order.
 
 - [Version control](version-control.md): Git or Plastic as the source of truth.
 - [Ports and adapters](ports-and-adapters.md): the domain core and its boundary to Unity.

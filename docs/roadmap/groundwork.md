@@ -1,6 +1,6 @@
 # Groundwork
 
-Status: in progress.
+Status: done.
 
 Sets up the project's documents (`DESIGN.md`, `CONTEXT.md`, the decisions,
 ideas and roadmap folders, and `AGENTS.md`), the [attack system

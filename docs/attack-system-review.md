@@ -164,7 +164,7 @@ Accessing `Renderer.material` creates a copy of the material per renderer. The s
 
 ### B4. Danger warning bookkeeping is unbalanced
 
-Severity low. Latent. `B4_DangerTiles_AreCleanAfterQuittingMidWarning` passes.
+Severity low. Latent. Confirmed by `B4_QuittingMidWarning_ReleasesTheWarning`, which checks the count before the arena is rebuilt.
 
 My first read was that quitting during a warning leaves tiles stuck red. That does not happen: `ArenaPresenter` destroys the tiles on the menu and `TileVisualizer.OnArenaVisualized` resets all counts when the arena is rebuilt. The bookkeeping is still wrong in two ways, and both will bite once attacks can be cancelled mid-run:
 

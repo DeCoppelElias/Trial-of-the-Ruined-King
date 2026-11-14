@@ -16,6 +16,7 @@ namespace BugVerification
         private TimeService _time;
         private AttackService _attacks;
         private int _spawned;
+        private TestSpearRowDefinition _definition;
 
         private void CreateAttacker(int attacksPerWave)
         {
@@ -29,7 +30,8 @@ namespace BugVerification
 
             _go = new GameObject("PlayerAttacker under test");
             var attacker = _go.AddComponent<PlayerAttacker>();
-            var definition = ScriptableObject.CreateInstance<PlayTestSpearRowDefinition>();
+            _definition = ScriptableObject.CreateInstance<TestSpearRowDefinition>();
+            var definition = _definition;
             definition.attackTiming = new AttackTiming(5f, 0.4f, 0f, 0f);
 
             Set(attacker, "_attackDefinitions", new List<AttackDefinitionBase> { definition });
@@ -54,6 +56,7 @@ namespace BugVerification
         public void TearDown()
         {
             if (_go != null) Object.Destroy(_go);
+            if (_definition != null) Object.Destroy(_definition);
         }
 
         [UnityTest, Category("KnownBug")]

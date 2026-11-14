@@ -18,6 +18,8 @@ that depends on the domain and connects it to Unity.
 - `Adapter.PlayerPrefsStorage`: implements `IStorage` with PlayerPrefs.
 - `Adapter.UnityLogging`: implements `ILogger` with the Unity console.
 - `Assets/Scripts/Editor`: inspector drawers.
+- `Assets/Scripts/Other`: loose scene scripts outside any assembly, such as
+  `FloatingMovement`.
 
 Tests live in `Assets/Tests`: domain tests, and bug verification tests in
 EditMode and PlayMode. How to run them is in `AGENTS.md`.

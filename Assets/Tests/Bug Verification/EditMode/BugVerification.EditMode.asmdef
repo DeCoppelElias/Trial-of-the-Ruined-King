@@ -6,7 +6,8 @@
         "UnityEditor.TestRunner",
         "Domain",
         "Shared",
-        "Gameplay"
+        "Gameplay",
+        "BugVerification.Shared"
     ],
     "includePlatforms": [
         "Editor"

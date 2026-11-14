@@ -50,8 +50,11 @@ Tiles marked red to show where an attack is about to hit.
 _Avoid_: telegraph, highlight
 
 **Danger tile**:
-A tile that hurts the player right now, during an attack's Impact stage.
+A tile that hurts the player right now.
 _Avoid_: warning tile, red tile
+
+**Pattern**:
+The set of tiles an attack threatens, and how that set moves over its stages. The stage says when, the pattern says where.
 
 **Wave**:
 Whatever spawns each time the spawn timer fires: either a sequence or a burst of random attacks.
@@ -59,7 +62,7 @@ _Avoid_: round
 
 **Sequence**:
 A hand-authored wave: a timed list of attacks designed to be learned.
-_Avoid_: pattern, combo
+_Avoid_: combo
 
 ### Rewards
 

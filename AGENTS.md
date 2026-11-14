@@ -56,3 +56,6 @@ dialog nobody can see, and the run hangs forever.
 
 Tests in category `KnownBug` are expected to fail until their bug is fixed.
 Tests in `DesignQuestion` show behaviour that may or may not be intended.
+"The tests pass" means both suites pass with those two categories left out.
+Add `-testCategory "!KnownBug;!DesignQuestion"` to each command for that
+check, and run without it to see which bugs remain.

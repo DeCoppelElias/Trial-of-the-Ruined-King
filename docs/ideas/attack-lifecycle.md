@@ -27,3 +27,4 @@ The attack model, attack timing, the patterns, and the attack presentations.
 - Is the warning a stage, or data on Telegraph?
 - Does a stage carry leftover time into the next?
 - Are the stages fixed for every attack, or can an attack skip or repeat one?
+- Which stages can hurt? Spears hurt during Commit, hammers during Impact.

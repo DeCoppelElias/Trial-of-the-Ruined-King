@@ -6,7 +6,7 @@ what it depends on and the decisions it is bound by, linked rather than
 restated. The order lives only in the list below. Inserting an entry is a new
 file and one new line here, and nothing is ever renumbered.
 
-1. [Groundwork](groundwork.md) in progress.
+1. [Groundwork](groundwork.md) done.
 
 Foundations: each entry settles one decision and brings the code in line. New
 features start once these are done.
