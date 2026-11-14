@@ -34,3 +34,19 @@ From the attack system review:
 - [Difficulty curve](difficulty-curve.md): how difficulty rises.
 - [Attack extensibility](attack-extensibility.md): fewer places to touch when adding an attack.
 - [Frame rate independence](frame-rate-independence.md): same timing at any frame rate.
+
+Architecture topics, each grilled on its own to settle a decision and bring the
+code in line. Grill in this order: version control, ports and adapters,
+testing, game clock, randomness, domain events, composition root, game state,
+grid arena, attack lifecycle.
+
+- [Version control](version-control.md): Git or Plastic as the source of truth.
+- [Ports and adapters](ports-and-adapters.md): the domain core and its boundary to Unity.
+- [Testing](testing.md): what is tested where, and what done requires.
+- [Game clock](game-clock.md): who owns time, scaling and pausing.
+- [Randomness](randomness.md): one seedable source of random rolls.
+- [Domain events](domain-events.md): how the domain reports what happened.
+- [Composition root](composition-root.md): how the game is wired at start.
+- [Game state](game-state.md): the states a run moves through.
+- [Grid arena](grid-arena.md): tiles, step movement and per-tile hits.
+- [Attack lifecycle](attack-lifecycle.md): stages and patterns of an attack.

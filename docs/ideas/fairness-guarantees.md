@@ -25,3 +25,4 @@ presentation.
 
 - Which guarantees, and what numbers?
 - Do the guarantees hold at every difficulty, or relax at the top?
+- Is the warning its own stage? Settled by the [attack lifecycle](attack-lifecycle.md), grilled first.

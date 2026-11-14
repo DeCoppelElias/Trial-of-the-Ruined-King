@@ -7,7 +7,8 @@ Status: idea.
 Makes adding an attack touch a few places instead of about ten across three
 assemblies. Each definition asset would create its own gameplay and
 presentation factories, one list of definitions would feed both spawning and
-presentation, and lookups by C# type would go.
+presentation, and lookups by C# type would go. It also decides the content
+format: how an attack and a sequence are described as assets.
 
 ## Why it is interesting
 
@@ -24,3 +25,4 @@ and the scene setup.
 ## Open questions
 
 - Do this before or after [spawning moves into the domain](domain-spawning.md)?
+- Keep attacks and sequences as ScriptableObject assets? Keep sequence steps in `[SerializeReference]`? This grill ends in an `attack-content` decision.

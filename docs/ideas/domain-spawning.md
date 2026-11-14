@@ -23,3 +23,4 @@ clock for everything. It also covers splitting `PlayerAttacker` (A1). See the
 
 - Does a new wave cancel the one still playing? Today it tries to and fails
   (B3). This ties into the [difficulty curve](difficulty-curve.md).
+- Which clock does spawning run on? Settled by the [game clock](game-clock.md), grilled first.

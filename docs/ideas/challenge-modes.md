@@ -21,3 +21,4 @@ Run setup, random spawning, and the menu.
 - Which modes first? The original vision lists a lightweight seed as nice to
   have for the demo.
 - Do modes get their own high scores?
+- A seeded run needs one source of [randomness](randomness.md) and a repeatable [game clock](game-clock.md).

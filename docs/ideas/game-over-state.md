@@ -24,3 +24,4 @@ and the death presentation.
 
 - Does the death slow motion run inside the game over state or before it?
 - Is the score frozen at the moment of death?
+- Built on the [game state](game-state.md) model, grilled first.

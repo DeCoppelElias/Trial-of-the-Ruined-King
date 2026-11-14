@@ -21,3 +21,4 @@ The spear pattern, the spear presentation, and hit checks.
 ## Open questions
 
 - Should a fast attack check every tile it crossed since the last tick (B7b)?
+- Builds on the [grid arena](grid-arena.md) and the [attack lifecycle](attack-lifecycle.md), grilled first.
