@@ -1,0 +1,13 @@
+name: Docs
+
+on: [push, pull_request]
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Fetch groundwork's checker at a pinned version
+        run: curl -fsSL https://raw.githubusercontent.com/DeCoppelElias/groundwork/v0.1.0/scripts/docs_check.py -o "$RUNNER_TEMP/docs_check.py"
+      - name: Check the documents
+        run: python3 "$RUNNER_TEMP/docs_check.py"
