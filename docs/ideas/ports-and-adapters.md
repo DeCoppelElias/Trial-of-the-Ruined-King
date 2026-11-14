@@ -1,6 +1,6 @@
 # Ports and adapters
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/ports-and-adapters.md).
 
 ## What it does
 

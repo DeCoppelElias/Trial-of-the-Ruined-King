@@ -1,6 +1,6 @@
 # Domain events
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/domain-events.md).
 
 ## What it does
 

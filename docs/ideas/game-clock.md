@@ -1,6 +1,6 @@
 # Game clock
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/game-clock.md).
 
 ## What it does
 

@@ -1,6 +1,6 @@
 # Hitbox or graphic
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/hitbox-or-graphic.md).
 
 ## What it does
 

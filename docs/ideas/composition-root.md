@@ -1,6 +1,6 @@
 # Composition root
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/composition-root.md).
 
 ## What it does
 

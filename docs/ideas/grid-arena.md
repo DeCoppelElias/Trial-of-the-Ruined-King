@@ -1,6 +1,6 @@
 # Grid arena
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/grid-arena.md).
 
 ## What it does
 

@@ -1,6 +1,6 @@
 # Attack extensibility
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/attack-extensibility.md).
 
 ## What it does
 

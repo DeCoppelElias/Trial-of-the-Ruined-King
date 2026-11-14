@@ -1,6 +1,6 @@
 # Testing
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/testing.md).
 
 ## What it does
 

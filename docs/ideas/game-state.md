@@ -1,6 +1,6 @@
 # Game state
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/game-state.md).
 
 ## What it does
 

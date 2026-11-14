@@ -1,6 +1,6 @@
 # Spawning in the domain
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/domain-spawning.md).
 
 ## What it does
 

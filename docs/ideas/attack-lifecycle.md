@@ -1,6 +1,6 @@
 # Attack lifecycle
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/attack-lifecycle.md).
 
 ## What it does
 

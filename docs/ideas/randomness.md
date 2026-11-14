@@ -1,6 +1,6 @@
 # Randomness
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/randomness.md).
 
 ## What it does
 

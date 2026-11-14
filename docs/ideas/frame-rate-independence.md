@@ -1,6 +1,6 @@
 # Frame rate independence
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/frame-rate-independence.md).
 
 ## What it does
 

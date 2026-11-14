@@ -1,6 +1,6 @@
 # Version control
 
-Status: idea.
+Status: planned, see the [roadmap entry](../roadmap/version-control.md).
 
 ## What it does
 
