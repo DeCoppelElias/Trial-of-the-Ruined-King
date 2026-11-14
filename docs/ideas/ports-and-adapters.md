@@ -8,7 +8,7 @@ Decides the shape of the code, also called hexagonal architecture: a domain
 core that knows nothing of Unity, reaching the outside only through ports, with
 each adapter in its own assembly. See Alistair Cockburn's
 [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/)
-for the pattern. The [README](../../README.md) maps the assemblies and ports
+for the pattern. The [architecture map](../../ARCHITECTURE.md) shows the assemblies and ports
 as they are today.
 
 ## Why it is interesting

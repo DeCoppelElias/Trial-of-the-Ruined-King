@@ -1,25 +1,44 @@
-# Trial-of-the-Ruined-King
-Trial of the Ruined King is a survival dodging game where the player has to dodge endless waves of escalating attacks on a grid arena. Chase high scores and collect gold in this mysterious survival game.
+# 🗡️ Trial of the Ruined King
 
-## Code layout
+Survive waves of increasingly difficult attack patterns in a grid-based arena.  
+Dodge telegraphed attacks, chase high scores, and collect gold as the challenge ramps up.  
 
-The code follows ports and adapters. `Assets/Scripts/Domain` is the game's
-rules in plain C#. Each `Assets/Scripts/Adapter.*` folder is its own assembly
-that depends on the domain and connects it to Unity.
+## 🎮 How to Play
 
-- `Domain`: models, services, and the interfaces in `Domain/Ports`.
-- `Adapter.Bootstrap`: `GameBootstrap`, which builds and wires everything.
-- `Adapter.Gameplay`: `DomainUpdater`, which ticks the domain, plus spawning
-  and the attack factories.
-- `Adapter.GamePresentation`: everything the player sees and hears of a run.
-- `Adapter.Player`: player input and movement.
-- `Adapter.UI`: menus, stats and the game over screen.
-- `Adapter.Shared`: attack definitions used by gameplay and presentation.
-- `Adapter.PlayerPrefsStorage`: implements `IStorage` with PlayerPrefs.
-- `Adapter.UnityLogging`: implements `ILogger` with the Unity console.
-- `Assets/Scripts/Editor`: inspector drawers.
-- `Assets/Scripts/Other`: loose scene scripts outside any assembly, such as
-  `FloatingMovement`.
+Move across the grid to avoid incoming attacks. Each attack is telegraphed before it lands, giving you a short window to react.
 
-Tests live in `Assets/Tests`: domain tests, and bug verification tests in
-EditMode and PlayMode. How to run them is in `AGENTS.md`.
+Your goals:
+- 🧭 Stay alive as long as possible  
+- 💰 Collect gold coins scattered across the arena  
+- 📈 Push your score higher with attack successfully dodged
+
+## 🎥 Demo
+
+<p align="center">
+  <img src="demo.gif" alt="Gameplay Demo" width="200"/>
+</p>
+
+## 🛠️ Technical Overview
+
+Built with **Domain-Driven Design** and **Clean Architecture**.
+
+**Project Structure:**
+
+The project is split into a **domain core** and multiple **adapter layers**, following Clean Architecture principles. This keeps the game logic independent from Unity and easy to test.
+
+- `Domain/`  
+  Contains the core game logic and rules.  
+  This includes entities such as the Player, Arena, and Attacks, as well as domain services and events.  
+  This layer has **no dependencies on Unity** and can be tested in isolation.
+
+- `Adapter.Gameplay/`  
+  Acts as the bridge between the domain and the gameplay layer in Unity.  
+  It translates domain concepts into something Unity can execute (e.g., triggering actions, updating state based on input).
+
+- `Adapter.GamePresentation/`  
+  Responsible for visuals and feedback.  
+  This includes rendering, animations, UI, and playing effects based on domain events.
+
+- `Adapter.Bootstrap/`  
+  Handles application startup and wiring.  
+  This layer is responsible for initializing the system, connecting dependencies, and setting up communication between the domain and adapters.

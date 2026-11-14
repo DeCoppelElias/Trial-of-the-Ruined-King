@@ -6,13 +6,15 @@ A survival dodging game where the player dodges endless waves of escalating atta
 
 - `DESIGN.md` what Trial of the Ruined King is for. Read it before proposing a feature.
 - `CONTEXT.md` the glossary. Use its words.
+- `ARCHITECTURE.md` the map of the code as it is. Read it before changing code.
 - `docs/adr/` the decisions, one file per topic. Its README maps them by area.
   Read the ones that bear on a change before making it.
 - `docs/ideas/` what is wanted and not decided. A new idea goes here without
   asking, in the format its README gives.
 - `docs/roadmap/` the committed build order, listed in its README.
 
-Each document says at its top what it holds and never holds. When you are not
+`README.md` is for players and visitors to the repo. Agent information never
+goes there. Each document says at its top what it holds and never holds. When you are not
 sure where something belongs, ask EliasDeCoppel rather than picking. Link a
 decision or an entry rather than restating it.
 
@@ -37,9 +39,10 @@ EliasDeCoppel says go.
 
 An entry is built on its own branch, `entry-<slug>`. Grill the details it
 leaves open before planning. It is finished when the tests pass, the code is
-reviewed, its status reads `done`, the project's README describes what it built, any idea
-it built is marked `built`, any choice made on the way is in its decision, and
-`groundwork-docs-check` is clean. Then it merges on EliasDeCoppel's go.
+reviewed, its status reads `done`, `ARCHITECTURE.md` describes any code it
+moved or added, any idea it built is marked `built`, any choice made on the
+way is in its decision, and `groundwork-docs-check` is clean. Then it merges
+on EliasDeCoppel's go.
 
 ## Build and run
 
