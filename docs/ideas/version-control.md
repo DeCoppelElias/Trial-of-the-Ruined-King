@@ -1,6 +1,6 @@
 # Version control
 
-Status: planned, see the [roadmap entry](../roadmap/version-control.md).
+Status: built, see the [decision](../adr/version-control.md).
 
 ## What it does
 

@@ -9,9 +9,15 @@ A decision belongs here when it is hard to reverse, would surprise someone
 reading the code, and came from a real trade-off. Anything else lives in the
 code and its tests.
 
-A file holds a title, then in a few sentences the context, the decision and
-why. Add the rejected options only when the reason they lost is worth
-remembering, and the consequences only when they are not obvious.
+A file holds a title, then in a few sentences the decision and why. It states
+the project as it is now, never how it used to be or how the choice was
+reached. Git keeps that. Add the rejected options only when the reason they
+lost is worth remembering, and the consequences only when they are not
+obvious.
 
 The list below groups the topics by area, one line each. It is the map: read
 it to find which decisions bear on a piece of work.
+
+Tooling:
+
+- [Version control](version-control.md): Git with GitHub only, Plastic removed.
