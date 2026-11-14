@@ -48,3 +48,7 @@ code in line. The [roadmap](../roadmap/README.md) holds the order.
 - [Game state](game-state.md): the states a run moves through.
 - [Grid arena](grid-arena.md): tiles, step movement and per-tile hits.
 - [Attack lifecycle](attack-lifecycle.md): stages and patterns of an attack.
+
+Tooling:
+
+- [Unity MCP](unity-mcp.md): an agent drives the open editor, scenes and screenshots.
