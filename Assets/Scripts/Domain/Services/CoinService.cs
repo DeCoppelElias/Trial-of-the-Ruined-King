@@ -22,7 +22,7 @@ namespace Domain.Services
 
         public CoinService(ILogger logger, IArena arena, IPlayerService playerService, IGameStateService gameStateService, Random random)
         {
-            _random = random;
+            _random = random ?? throw new ArgumentNullException(nameof(random));
             _arena = arena;
             _playerService = playerService;
             _gameStateService = gameStateService;

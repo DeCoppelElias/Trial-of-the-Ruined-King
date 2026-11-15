@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if (direction == Vector2Int.right) return GridDirection.Right;
         if (direction == Vector2Int.left) return GridDirection.Left;
         if (direction == Vector2Int.up) return GridDirection.Up;
-        return GridDirection.Down;
+        if (direction == Vector2Int.down) return GridDirection.Down;
+        throw new System.ArgumentOutOfRangeException(nameof(direction), direction, "Not a grid direction");
     }
 }

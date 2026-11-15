@@ -58,8 +58,7 @@ public class ArenaPresenter : MonoBehaviour
                 continue;
             }
 
-            Vector3 localPosition = new Vector3(position.GridX, 0f, position.GridY);
-            Vector3 worldPosition = _arenaSpace.Origin + localPosition;
+            Vector3 worldPosition = _arenaSpace.GridToWorld(position);
 
             int i = position.GridX + position.GridY;
             GameObject prefabToUse = (i % 2 == 0) ? _lightTilePrefab : _darkTilePrefab;
@@ -125,8 +124,7 @@ public class ArenaPresenter : MonoBehaviour
         {
             foreach (var position in group)
             {
-                Vector3 localPosition = new Vector3(position.GridX, 0, position.GridY);
-                Vector3 worldPosition = _arenaSpace.Origin + localPosition;
+                Vector3 worldPosition = _arenaSpace.GridToWorld(position);
 
                 int i = position.GridX + position.GridY;
                 GameObject prefabToUse = (i % 2 == 0) ? _lightTilePrefab : _darkTilePrefab;

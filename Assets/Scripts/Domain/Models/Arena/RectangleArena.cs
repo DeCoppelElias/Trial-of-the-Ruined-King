@@ -17,7 +17,7 @@ namespace Domain.Models
         {
             Width = width;
             Height = height;
-            _random = random;
+            _random = random ?? throw new ArgumentNullException(nameof(random));
             InitializeTiles();
         }
 
