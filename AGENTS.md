@@ -50,8 +50,8 @@ Unity 6000.3.9f1. Open the project in the Unity Editor to run it, or run the
 tests from the Test Runner window. From a terminal, close the editor first.
 `<Unity>` below is the path to that editor's `Unity.exe`.
 
-- EditMode tests: `<Unity> -batchmode -projectPath . -runTests -testPlatform EditMode -testResults editmode.xml`
-- PlayMode tests: `<Unity> -batchmode -projectPath . -runTests -testPlatform PlayMode -testResults playmode.xml`
+- EditMode tests: `<Unity> -batchmode -nographics -projectPath . -runTests -testPlatform EditMode -testResults editmode.xml`
+- PlayMode tests: `<Unity> -batchmode -nographics -projectPath . -runTests -testPlatform PlayMode -testResults playmode.xml`
 - Windows build: `<Unity> -batchmode -quit -projectPath . -buildTarget Win64 -buildWindows64Player build/Game.exe`
 
 Wait on the Unity process itself, not on its output. The AI Assistant package
@@ -60,8 +60,5 @@ a shell that pipes or captures Unity's output never returns. In PowerShell,
 start Unity with `Start-Process -PassThru`, call `WaitForExit()` on the result,
 then stop any `relay_win` process left behind.
 
-Tests in category `KnownBug` are expected to fail until their bug is fixed.
-Tests in `DesignQuestion` show behaviour that may or may not be intended.
-"The tests pass" means both suites pass with those two categories left out.
-Add `-testCategory "!KnownBug;!DesignQuestion"` to each command for that
-check, and run without it to see which bugs remain.
+"The tests pass" means both suites pass in full. The
+[testing](docs/adr/testing.md) decision says what an entry must test.
