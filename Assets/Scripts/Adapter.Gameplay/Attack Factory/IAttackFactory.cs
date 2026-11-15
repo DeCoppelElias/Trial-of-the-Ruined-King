@@ -1,5 +1,5 @@
+using Domain.Models;
 using System.Collections.Generic;
-using Domain.Ports;
 
 public interface IAttackFactory
 {

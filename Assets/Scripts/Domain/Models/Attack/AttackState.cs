@@ -1,11 +1,14 @@
-public struct AttackState
+namespace Domain.Models
 {
-    public AttackStage Stage { get; }
-    public float ProgressInStage { get; }
-
-    public AttackState(AttackStage stage, float progressInStage)
+    public struct AttackState
     {
-        Stage = stage;
-        ProgressInStage = progressInStage;
+        public AttackStage Stage { get; }
+        public float ProgressInStage { get; }
+
+        public AttackState(AttackStage stage, float progressInStage)
+        {
+            Stage = stage;
+            ProgressInStage = progressInStage;
+        }
     }
 }

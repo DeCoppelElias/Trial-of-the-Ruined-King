@@ -1,6 +1,6 @@
+using Domain.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Ports;
 using UnityEngine;
 
 public class HammerAttackFactory : IAttackFactory

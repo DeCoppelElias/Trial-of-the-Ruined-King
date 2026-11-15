@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 
-public interface IAttackPattern
+namespace Domain.Models
 {
-    IEnumerable<GridPosition> GetAffectedArea();
-    IEnumerable<GridPosition> GetActiveDangerPositions(AttackState state);
+    public interface IAttackPattern
+    {
+        IEnumerable<GridPosition> GetAffectedArea();
+        IEnumerable<GridPosition> GetActiveDangerPositions(AttackState state);
+    }
 }

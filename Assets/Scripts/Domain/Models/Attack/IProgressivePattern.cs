@@ -1,4 +1,7 @@
-public interface IProgressivePattern : IAttackPattern
+namespace Domain.Models
 {
-    float GetProgress(AttackState state);
+    public interface IProgressivePattern : IAttackPattern
+    {
+        float GetProgress(AttackState state);
+    }
 }

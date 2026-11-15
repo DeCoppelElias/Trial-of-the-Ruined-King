@@ -1,11 +1,14 @@
-public class Coin
+namespace Domain.Models
 {
-    public int Value { get; private set; }
-    public GridPosition Position { get; private set; }
-
-    public Coin(GridPosition position, int value = 1)
+    public class Coin
     {
-        Position = position;
-        Value = value;
+        public int Value { get; private set; }
+        public GridPosition Position { get; private set; }
+
+        public Coin(GridPosition position, int value = 1)
+        {
+            Position = position;
+            Value = value;
+        }
     }
 }

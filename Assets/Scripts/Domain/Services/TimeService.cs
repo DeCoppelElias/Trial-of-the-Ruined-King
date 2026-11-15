@@ -1,5 +1,6 @@
+using Domain.Models;
+using Domain.Ports.Driving;
 using System;
-using Domain.Ports;
 
 namespace Domain.Services
 {

@@ -1,3 +1,4 @@
+using Domain.Models;
 using System.Collections.Generic;
 using UnityEngine;
 public class SpearRowPresentation : SpearPresentationBase
@@ -6,13 +7,13 @@ public class SpearRowPresentation : SpearPresentationBase
 
     public SpearRowPresentation(
         Attack attack,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
         SpearVisualConfig visualConfig,
         SpearAudioConfig audioConfig)
-        : base(attack, arena, parent, tileVisualizer, audioPlayer, visualConfig, audioConfig)
+        : base(attack, arenaSpace, parent, tileVisualizer, audioPlayer, visualConfig, audioConfig)
     {
         SpearRowAttack rowAttack = attack as SpearRowAttack;
         _direction = rowAttack != null ? rowAttack.Direction : HorizontalDirection.LeftToRight;

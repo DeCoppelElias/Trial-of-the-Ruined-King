@@ -1,4 +1,5 @@
-using Domain.Ports;
+using Domain.Models;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +8,12 @@ using UnityEngine;
 /// </summary>
 public class HammerPresentationFactory : IAttackPresentationFactory
 {
-    protected readonly IArena _arena;
+    protected readonly ArenaSpace _arenaSpace;
     protected readonly Transform _parent;
     protected readonly TileVisualizer _tileVisualizer;
     protected readonly ArenaShaker _arenaShaker;
     protected readonly AudioPlayer _audioPlayer;
-    protected readonly DomainUpdater _domainUpdator;
+    protected readonly Func<float> _timeScale;
 
     protected readonly HammerVisualConfig _visualConfig;
     protected readonly HammerAudioConfig _audioConfig;
@@ -20,21 +21,21 @@ public class HammerPresentationFactory : IAttackPresentationFactory
     public HammerPresentationFactory(
         HammerVisualConfig visualConfig,
         HammerAudioConfig audioConfig,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform transform,
         TileVisualizer tileVisualizer,
         ArenaShaker arenaShaker,
         AudioPlayer audioPlayer,
-        DomainUpdater domainUpdator)
+        Func<float> timeScale)
     {
         _visualConfig = visualConfig;
         _audioConfig = audioConfig;
-        _arena = arena;
+        _arenaSpace = arenaSpace;
         _parent = transform;
         _tileVisualizer = tileVisualizer;
         _arenaShaker = arenaShaker;
         _audioPlayer = audioPlayer;
-        _domainUpdator = domainUpdator;
+        _timeScale = timeScale;
     }
 
     public IAttackPresentation CreatePresentation(Attack attack)
@@ -42,6 +43,6 @@ public class HammerPresentationFactory : IAttackPresentationFactory
         if (attack is not HammerAttack)
             throw new System.ArgumentException("Invalid attack type for HammerPresentationFactory");
 
-        return new HammerPresentation((HammerAttack) attack, _arena, _parent, _tileVisualizer, _arenaShaker, _audioPlayer, _domainUpdator, _visualConfig, _audioConfig);
+        return new HammerPresentation((HammerAttack) attack, _arenaSpace, _parent, _tileVisualizer, _arenaShaker, _audioPlayer, _timeScale, _visualConfig, _audioConfig);
     }
 }

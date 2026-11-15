@@ -1,4 +1,3 @@
-using Domain.Ports;
 using System;
 using UnityEngine;
 
@@ -10,19 +9,19 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
 {
     public IAttackPresentationFactory Build(
         IAttackDefinition definition,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
         ArenaShaker arenaShaker,
-        DomainUpdater domainUpdator)
+        Func<float> timeScale)
     {
         return definition switch
         {
             SpearRowAttackDefinition spearRow => new SpearRowPresentationFactory(
                 spearRow.visualConfig,
                 spearRow.audioConfig,
-                arena,
+                arenaSpace,
                 parent,
                 tileVisualizer,
                 audioPlayer),
@@ -30,7 +29,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
             SpearColumnAttackDefinition spearColumn => new SpearColumnPresentationFactory(
                 spearColumn.visualConfig,
                 spearColumn.audioConfig,
-                arena,
+                arenaSpace,
                 parent,
                 tileVisualizer,
                 audioPlayer),
@@ -38,12 +37,12 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
             HammerAttackDefinition hammer => new HammerPresentationFactory(
                 hammer.visualConfig,
                 hammer.audioConfig,
-                arena,
+                arenaSpace,
                 parent,
                 tileVisualizer,
                 arenaShaker,
                 audioPlayer,
-                domainUpdator),
+                timeScale),
 
             _ => throw new NotSupportedException($"No factory builder implementation for attack definition type: {definition.GetType().Name}")
         };

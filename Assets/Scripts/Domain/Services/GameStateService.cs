@@ -1,17 +1,22 @@
+using Domain.Models;
+using Domain.Ports.Driving;
 using System;
 
-public class GameStateService : IGameStateService
+namespace Domain.Services
 {
-    public GameState CurrentState { get; private set; } = GameState.MainMenu;
-
-    public event Action<GameState, GameState> OnStateChanged;
-
-    public void TransitionTo(GameState newState)
+    public class GameStateService : IGameStateService
     {
-        if (CurrentState == newState) return;
+        public GameState CurrentState { get; private set; } = GameState.MainMenu;
 
-        GameState previousState = CurrentState;
-        CurrentState = newState;
-        OnStateChanged?.Invoke(previousState, newState);
+        public event Action<GameState, GameState> OnStateChanged;
+
+        public void TransitionTo(GameState newState)
+        {
+            if (CurrentState == newState) return;
+
+            GameState previousState = CurrentState;
+            CurrentState = newState;
+            OnStateChanged?.Invoke(previousState, newState);
+        }
     }
 }

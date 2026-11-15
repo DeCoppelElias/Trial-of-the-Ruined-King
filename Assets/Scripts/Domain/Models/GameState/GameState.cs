@@ -1,5 +1,8 @@
-public enum GameState
+namespace Domain.Models
 {
-    MainMenu,
-    Gameplay
+    public enum GameState
+    {
+        MainMenu,
+        Gameplay
+    }
 }

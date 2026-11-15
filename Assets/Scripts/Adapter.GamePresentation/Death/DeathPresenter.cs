@@ -1,4 +1,5 @@
-using Domain.Ports;
+using System;
+using Domain.Ports.Driving;
 using UnityEngine;
 using System.Collections;
 
@@ -19,26 +20,29 @@ public class DeathPresenter : MonoBehaviour
     [Header("Game Over UI Settings")]
     [SerializeField] private float _gameOverUIDelay = 2.5f;
 
-    private DomainUpdater _domainUpdater;
+    private Action<float, float> _setTimeScale;
     private IPlayerService _playerService;
     private CameraEffectsPresenter _cameraEffectsPresenter;
     private PlayerPresenter _playerPresenter;
-    private UIManager _uiManager;
 
-    public void Initialize(IPlayerService playerService, CameraEffectsPresenter cameraEffectsPresenter, DomainUpdater domainUpdater, PlayerPresenter playerPresenter, UIManager uiManager)
+    /// <summary>
+    /// Raised when the death sequence has played long enough for the game over screen.
+    /// </summary>
+    public event Action OnDeathSequenceFinished;
+
+    public void Initialize(IPlayerService playerService, CameraEffectsPresenter cameraEffectsPresenter, Action<float, float> setTimeScale, PlayerPresenter playerPresenter)
     {
         _playerService = playerService;
         _cameraEffectsPresenter = cameraEffectsPresenter;
-        _domainUpdater = domainUpdater;
+        _setTimeScale = setTimeScale;
         _playerPresenter = playerPresenter;
-        _uiManager = uiManager;
 
         _playerService.OnPlayerDied += HandlePlayerDeath;
     }
 
     private void HandlePlayerDeath()
     {
-        _domainUpdater.SetTimeScale(0, _slowMotionDuration);
+        _setTimeScale(0, _slowMotionDuration);
         _cameraEffectsPresenter.ZoomAndRotateCamera(_zoomInDuration, _zoomOutDuration, _zoomAmount, _rotationAmount);
         _playerPresenter.PlayDeathAnimation(_deathFallDuration);
 
@@ -48,6 +52,6 @@ public class DeathPresenter : MonoBehaviour
     private IEnumerator ShowGameOverUIAfterDelay()
     {
         yield return new WaitForSecondsRealtime(_gameOverUIDelay);
-        _uiManager.ShowGameOver(_playerService.Gold, _playerService.Score, _playerService.Score == _playerService.HighScore);
+        OnDeathSequenceFinished?.Invoke();
     }
 }

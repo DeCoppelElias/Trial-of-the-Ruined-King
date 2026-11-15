@@ -1,30 +1,35 @@
-using Domain.Ports;
+using Domain.Models;
+using Domain.Ports.Driving;
+using Domain.Ports.Driven;
 
-public class PlayerStatsPersistence : IPlayerStatsPersistence
+namespace Domain.Services
 {
-    private readonly IPlayerService _playerService;
-    private readonly IStorage _storage;
-    public PlayerStatsPersistence(IPlayerService playerService, IStorage storage)
+    public class PlayerStatsPersistence : IPlayerStatsPersistence
     {
-        _playerService = playerService;
-        _storage = storage;
-    }
-
-    public void HandleExitGameplay()
-    {
-        _storage.Save(StorageKeys.Highscore.ToString(), _playerService.HighScore);
-        _storage.Save(StorageKeys.Gold.ToString(), _playerService.Gold);
-    }
-
-    public void HandleStartGame()
-    {
-        if (_storage.HasKey(StorageKeys.Highscore.ToString()))
+        private readonly IPlayerService _playerService;
+        private readonly IStorage _storage;
+        public PlayerStatsPersistence(IPlayerService playerService, IStorage storage)
         {
-            _playerService.HighScore = _storage.Load<int>(StorageKeys.Highscore.ToString());
+            _playerService = playerService;
+            _storage = storage;
         }
-        if (_storage.HasKey(StorageKeys.Gold.ToString()))
+
+        public void HandleExitGameplay()
         {
-            _playerService.Gold = _storage.Load<int>(StorageKeys.Gold.ToString());
+            _storage.Save(StorageKeys.Highscore.ToString(), _playerService.HighScore);
+            _storage.Save(StorageKeys.Gold.ToString(), _playerService.Gold);
+        }
+
+        public void HandleStartGame()
+        {
+            if (_storage.HasKey(StorageKeys.Highscore.ToString()))
+            {
+                _playerService.HighScore = _storage.Load<int>(StorageKeys.Highscore.ToString());
+            }
+            if (_storage.HasKey(StorageKeys.Gold.ToString()))
+            {
+                _playerService.Gold = _storage.Load<int>(StorageKeys.Gold.ToString());
+            }
         }
     }
 }

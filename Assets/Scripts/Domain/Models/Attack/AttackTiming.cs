@@ -1,48 +1,51 @@
-[System.Serializable]
-public class AttackTiming
+namespace Domain.Models
 {
-    public float TelegraphDuration;
-    public float CommitDuration;
-    public float ImpactDuration;
-    public float RecoveryDuration;
-
-    public AttackTiming(float telegraphDuration, float commitDuration, float impactDuration, float recoveryDuration)
+    [System.Serializable]
+    public class AttackTiming
     {
-        TelegraphDuration = telegraphDuration;
-        CommitDuration = commitDuration;
-        ImpactDuration = impactDuration;
-        RecoveryDuration = recoveryDuration;
-    }
+        public float TelegraphDuration;
+        public float CommitDuration;
+        public float ImpactDuration;
+        public float RecoveryDuration;
 
-    public float GetTotalDuration()
-    {
-        return TelegraphDuration + CommitDuration + ImpactDuration + RecoveryDuration;
-    }
-
-    public float GetDurationForStage(AttackStage stage)
-    {
-        switch (stage)
+        public AttackTiming(float telegraphDuration, float commitDuration, float impactDuration, float recoveryDuration)
         {
-            case AttackStage.Telegraph:
-                return TelegraphDuration;
-            case AttackStage.Commit:
-                return CommitDuration;
-            case AttackStage.Impact:
-                return ImpactDuration;
-            case AttackStage.Recovery:
-                return RecoveryDuration;
-            default:
-                return 0f;
+            TelegraphDuration = telegraphDuration;
+            CommitDuration = commitDuration;
+            ImpactDuration = impactDuration;
+            RecoveryDuration = recoveryDuration;
         }
-    }
 
-    public AttackTiming Multiply(float amount)
-    {
-        return new AttackTiming(
-            TelegraphDuration * amount,
-            CommitDuration * amount,
-            ImpactDuration * amount,
-            RecoveryDuration * amount
-        );
+        public float GetTotalDuration()
+        {
+            return TelegraphDuration + CommitDuration + ImpactDuration + RecoveryDuration;
+        }
+
+        public float GetDurationForStage(AttackStage stage)
+        {
+            switch (stage)
+            {
+                case AttackStage.Telegraph:
+                    return TelegraphDuration;
+                case AttackStage.Commit:
+                    return CommitDuration;
+                case AttackStage.Impact:
+                    return ImpactDuration;
+                case AttackStage.Recovery:
+                    return RecoveryDuration;
+                default:
+                    return 0f;
+            }
+        }
+
+        public AttackTiming Multiply(float amount)
+        {
+            return new AttackTiming(
+                TelegraphDuration * amount,
+                CommitDuration * amount,
+                ImpactDuration * amount,
+                RecoveryDuration * amount
+            );
+        }
     }
 }

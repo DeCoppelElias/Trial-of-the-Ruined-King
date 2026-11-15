@@ -1,3 +1,5 @@
+using Domain.Ports.Driven;
+using ILogger = Domain.Ports.Driven.ILogger;
 using UnityEngine;
 
 public class UnityLogger : ILogger

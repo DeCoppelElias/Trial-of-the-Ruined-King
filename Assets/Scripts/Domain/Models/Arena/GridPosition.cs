@@ -1,39 +1,42 @@
 using System;
 
-[Serializable]
-public class GridPosition
+namespace Domain.Models
 {
-    public int GridX;
-    public int GridY;
-
-    public GridPosition(int gridX, int gridY)
+    [Serializable]
+    public class GridPosition
     {
-        this.GridX = gridX;
-        this.GridY = gridY;
-    }
+        public int GridX;
+        public int GridY;
 
-    public GridPosition()
-    {
-        this.GridX = 0;
-        this.GridY = 0;
-    }
-
-    public override string ToString()
-    {
-        return $"({GridX}, {GridY})";
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (obj is GridPosition other)
+        public GridPosition(int gridX, int gridY)
         {
-            return GridX == other.GridX && GridY == other.GridY;
+            this.GridX = gridX;
+            this.GridY = gridY;
         }
-        return false;
-    }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(GridX, GridY);
+        public GridPosition()
+        {
+            this.GridX = 0;
+            this.GridY = 0;
+        }
+
+        public override string ToString()
+        {
+            return $"({GridX}, {GridY})";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is GridPosition other)
+            {
+                return GridX == other.GridX && GridY == other.GridY;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(GridX, GridY);
+        }
     }
 }

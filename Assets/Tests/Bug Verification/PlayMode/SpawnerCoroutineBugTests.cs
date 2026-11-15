@@ -1,3 +1,4 @@
+using Domain.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -21,7 +22,7 @@ namespace BugVerification
         private void CreateAttacker(int attacksPerWave)
         {
             // Tall arena so the row spear factory never runs out of free rows.
-            var arena = new RectangleArena(3, 10, Vector3.zero);
+            var arena = new RectangleArena(3, 10, new System.Random(0));
             _state = new GameStateService();
             _time = new TimeService(_state);
             _attacks = new AttackService(_time, _state);

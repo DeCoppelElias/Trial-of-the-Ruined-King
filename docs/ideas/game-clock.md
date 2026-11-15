@@ -23,6 +23,11 @@ particles follow no game clock at all. One pause flag serves every pauser
 [attack lifecycle](attack-lifecycle.md) all build on this choice, so grill it
 before them.
 
+Until this is built, presenters read and set the time scale through delegates
+that `Bootstrap` wires to `DomainUpdater`, because the
+[ports and adapters](../adr/ports-and-adapters.md) decision bars presentation
+from referencing `Gameplay`. This entry replaces those delegates.
+
 ## What it would touch
 
 `TimeService`, `DomainUpdater`, the hit and death presentations, and every

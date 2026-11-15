@@ -14,6 +14,10 @@ will mostly confirm the code and record why there is no physics. That is hard
 to reverse and surprises a reader. [Hitbox or graphic](hitbox-or-graphic.md)
 builds on it.
 
+Mapping tiles to world space is not part of the domain arena. It lives in
+`ArenaSpace` in presentation, per the
+[ports and adapters](../adr/ports-and-adapters.md) decision.
+
 ## What it would touch
 
 `RectangleArena`, player movement, and hit checks.

@@ -1,3 +1,4 @@
+using Domain.Models;
 using NUnit.Framework;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace Tests
         [SetUp]
         public void SetUp()
         {
-            _arena = new RectangleArena(5, 5, UnityEngine.Vector3.zero);
+            _arena = new RectangleArena(5, 5, new System.Random(0));
         }
 
         [Test]

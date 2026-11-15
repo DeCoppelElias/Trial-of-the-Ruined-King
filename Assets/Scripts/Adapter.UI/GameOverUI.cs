@@ -1,3 +1,5 @@
+using Domain.Models;
+using Domain.Ports.Driving;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -12,7 +14,7 @@ public class GameOverUI : UIElementBase
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _newHighscoreText;
 
-    private GameStateService _gameStateService;
+    private IGameStateService _gameStateService;
 
     [Header("Fade Settings")]
     [SerializeField] private float _fadeDuration = 1.0f;
@@ -32,7 +34,7 @@ public class GameOverUI : UIElementBase
     private int _targetScore;
     private bool _isNewHighscore;
 
-    public void Initialize(GameStateService gameStateService)
+    public void Initialize(IGameStateService gameStateService)
     {
         _gameStateService = gameStateService;
         _mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);

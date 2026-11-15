@@ -1,6 +1,6 @@
 # Ports and adapters
 
-Status: planned, see the [roadmap entry](../roadmap/ports-and-adapters.md).
+Status: built, see the [decision](../adr/ports-and-adapters.md).
 
 ## What it does
 

@@ -17,6 +17,10 @@ today an attack missing from one list is invisible but still deals damage. The
 review recommends doing this before adding a fourth attack. It covers A2 and
 A5. See the [attack system review](../attack-system-review.md), topic 7.
 
+Moving the sequence step parameters to another assembly or a namespace
+empties every stored step unless the assets are rewritten too, as the
+[ports and adapters](../adr/ports-and-adapters.md) decision explains.
+
 ## What it would touch
 
 The attack factories, the sequence definitions, the presentation factories,

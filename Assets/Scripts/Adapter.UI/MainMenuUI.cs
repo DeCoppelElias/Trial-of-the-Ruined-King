@@ -1,3 +1,5 @@
+using Domain.Models;
+using Domain.Ports.Driving;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +8,7 @@ public class MainMenuUI : UIElementBase
     [SerializeField] private GameObject _container;
     [SerializeField] private Button _startButton;
 
-    private GameStateService _gameStateManager;
+    private IGameStateService _gameStateManager;
 
     private void Awake()
     {
@@ -16,7 +18,7 @@ public class MainMenuUI : UIElementBase
         }
     }
 
-    public void Initialize(GameStateService gameStateManager)
+    public void Initialize(IGameStateService gameStateManager)
     {
         _gameStateManager = gameStateManager;
 

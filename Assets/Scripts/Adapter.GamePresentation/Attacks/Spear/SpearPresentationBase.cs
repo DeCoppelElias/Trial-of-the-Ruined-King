@@ -1,9 +1,10 @@
+using Domain.Models;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class SpearPresentationBase : AttackPresentationBase
 {
-    private readonly IArena _arena;
+    private readonly ArenaSpace _arenaSpace;
     private readonly Transform _parent;
 
     private readonly SpearVisualConfig _visualConfig;
@@ -24,14 +25,14 @@ public abstract class SpearPresentationBase : AttackPresentationBase
 
     protected SpearPresentationBase(
         Attack attack,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
         SpearVisualConfig visualConfig,
         SpearAudioConfig audioConfig) : base(attack, tileVisualizer, audioPlayer, audioConfig.CommitAudioEvent)
     {
-        _arena = arena;
+        _arenaSpace = arenaSpace;
         _parent = parent;
         _visualConfig = visualConfig;
         _audioConfig = audioConfig;
@@ -58,8 +59,8 @@ public abstract class SpearPresentationBase : AttackPresentationBase
         GridPosition endPos;
         DetermineStartAndEndPositions(positions, out startPos, out endPos);
 
-        Vector3 startWorld = _arena.GridToWorld(startPos);
-        Vector3 endWorld = _arena.GridToWorld(endPos);
+        Vector3 startWorld = _arenaSpace.GridToWorld(startPos);
+        Vector3 endWorld = _arenaSpace.GridToWorld(endPos);
         Vector3 direction = (endWorld - startWorld).normalized;
 
         float extraDistance = 2f;

@@ -1,8 +1,7 @@
-using Domain.Models.Player;
+using Domain.Models;
 using System;
-using UnityEngine;
 
-namespace Domain.Ports
+namespace Domain.Ports.Driving
 {
     public interface IPlayerService
     {
@@ -22,7 +21,6 @@ namespace Domain.Ports
         int GetPlayerHealth();
         bool IsPlayerAlive();
         GridPosition GetPlayerGridPosition();
-        Vector3 GetPlayerWorldPosition();
-        void MovePlayer(Vector2Int direction);
+        void MovePlayer(GridDirection direction);
     }
 }

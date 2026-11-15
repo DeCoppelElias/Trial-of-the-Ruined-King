@@ -1,3 +1,4 @@
+using Domain.Models;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,11 +10,11 @@ public class SpearColumnPresentationFactory : SpearPresentationBaseFactory
     public SpearColumnPresentationFactory(
         SpearVisualConfig visualConfig,
         SpearAudioConfig audioConfig,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer)
-        : base(visualConfig, audioConfig, arena, parent, tileVisualizer, audioPlayer)
+        : base(visualConfig, audioConfig, arenaSpace, parent, tileVisualizer, audioPlayer)
     {
     }
 
@@ -22,7 +23,7 @@ public class SpearColumnPresentationFactory : SpearPresentationBaseFactory
     {
         return new SpearColumnPresentation(
             attack,
-            _arena,
+            _arenaSpace,
             _parent,
             _tileVisualizer,
             _audioPlayer,

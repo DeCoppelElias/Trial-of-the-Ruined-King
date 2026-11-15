@@ -15,6 +15,11 @@ It fixes B1 (every hit after death triggers death again), B2 (score keeps
 rising after death) and most of B5 at the root, instead of patching each one.
 See the [attack system review](../attack-system-review.md), topic 1.
 
+Until this is built, `DeathPresenter` raises an event when its death sequence
+ends and `Bootstrap` routes it to `ShowGameOver`, because the
+[ports and adapters](../adr/ports-and-adapters.md) decision bars presentation
+from referencing `UI`. This entry replaces that bridge.
+
 ## What it would touch
 
 The game states, the player's death, scoring, saving the high score, spawning,

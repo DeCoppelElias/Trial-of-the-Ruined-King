@@ -1,5 +1,6 @@
+using Domain.Models;
+using Domain.Ports.Driven;
 using System.Collections.Generic;
-using Domain.Models.Player;
 using Domain.Services;
 using NUnit.Framework;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace BugVerification
         public void SetUp()
         {
             // Same wiring order as GameBootstrap.Awake, same arena size as the scene.
-            _arena = new RectangleArena(3, 4, Vector3.zero);
+            _arena = new RectangleArena(3, 4, new System.Random(0));
             _state = new GameStateService();
             _time = new TimeService(_state);
             _attacks = new AttackService(_time, _state);

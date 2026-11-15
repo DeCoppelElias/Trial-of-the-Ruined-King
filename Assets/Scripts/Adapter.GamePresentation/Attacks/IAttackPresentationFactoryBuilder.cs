@@ -1,4 +1,4 @@
-using Domain.Ports;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -11,19 +11,19 @@ public interface IAttackPresentationFactoryBuilder
     /// Builds a factory for creating attack presentations.
     /// </summary>
     /// <param name="definition">The attack definition containing configuration data</param>
-    /// <param name="arena">The game arena</param>
+    /// <param name="arenaSpace">Maps arena tiles to world positions</param>
     /// <param name="parent">Parent transform for instantiated visuals</param>
     /// <param name="tileVisualizer">Visualizer for tile danger indicators</param>
     /// <param name="audioPlayer">Audio player for sound effects</param>
     /// <param name="arenaShaker">Shaker for arena shake effects</param>
-    /// <param name="timeService">Time service for time-scaled animations</param>
+    /// <param name="timeScale">Reads the current game time scale</param>
     /// <returns>A factory that can create attack presentations</returns>
     IAttackPresentationFactory Build(
         IAttackDefinition definition,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
         ArenaShaker arenaShaker,
-        DomainUpdater domainUpdator);
+        Func<float> timeScale);
 }

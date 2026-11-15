@@ -1,17 +1,17 @@
-using Domain.Ports;
+using Domain.Models;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class HammerPresentation : AttackPresentationBase
 {
-    private readonly IArena _arena;
+    private readonly ArenaSpace _arenaSpace;
     private readonly Transform _parent;
     private readonly ArenaShaker _arenaShaker;
 
     private readonly HammerVisualConfig _visualConfig;
     private readonly HammerAudioConfig _audioConfig;
-    private readonly DomainUpdater _domainUpdator;
+    private readonly System.Func<float> _timeScale;
 
     private Renderer _renderer;
     private Animator _animator;
@@ -37,19 +37,19 @@ public class HammerPresentation : AttackPresentationBase
 
     public HammerPresentation(
         HammerAttack attack,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         ArenaShaker arenaShaker,
         AudioPlayer audioPlayer,
-        DomainUpdater domainUpdator,
+        System.Func<float> timeScale,
         HammerVisualConfig visualConfig,
         HammerAudioConfig audioConfig) : base(attack, tileVisualizer, audioPlayer, audioConfig.CommitAudio)
     {
-        _arena = arena;
+        _arenaSpace = arenaSpace;
         _parent = parent;
         _arenaShaker = arenaShaker;
-        _domainUpdator = domainUpdator;
+        _timeScale = timeScale;
 
         _visualConfig = visualConfig;
         _audioConfig = audioConfig;
@@ -83,7 +83,7 @@ public class HammerPresentation : AttackPresentationBase
         if (_instance == null)
             return;
 
-        if (_animator != null) _animator.speed = _baseAnimatorSpeed * _domainUpdator.CurrentTimeScale;
+        if (_animator != null) _animator.speed = _baseAnimatorSpeed * _timeScale();
 
         float elapsed = attack.ElapsedTimeInStage;
 
@@ -109,7 +109,7 @@ public class HammerPresentation : AttackPresentationBase
 
     private void CalculateTelegraphPositions(HammerAttack attack)
     {
-        Vector3 attackMiddlePosition = _arena.GridToWorld(attack.Middle);
+        Vector3 attackMiddlePosition = _arenaSpace.GridToWorld(attack.Middle);
         float directionMultiplier = attack.Direction == HorizontalDirection.RightToLeft ? 1f : -1f;
 
         _telegraphStartPosition = attackMiddlePosition + new Vector3(
@@ -240,7 +240,7 @@ public class HammerPresentation : AttackPresentationBase
 
         float animationLength = clip.length;
         _baseAnimatorSpeed = animationLength / stageDuration;
-        _animator.speed = _baseAnimatorSpeed * _domainUpdator.CurrentTimeScale;
+        _animator.speed = _baseAnimatorSpeed * _timeScale();
     }
 
     private AnimationClip GetAnimationClip(string clipName)

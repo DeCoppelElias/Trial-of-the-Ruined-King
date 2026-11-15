@@ -1,20 +1,18 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public interface IArena
+namespace Domain.Models
 {
-    int Width { get; }
-    int Height { get; }
-    Vector3 WorldPosition { get; }
-    
-    event Action OnArenaChanged;
-    
-    TileType GetTileType(GridPosition position);
-    IEnumerable<(GridPosition position, TileType tileType)> GetAllTiles();
-    bool IsInBounds(GridPosition position);
-    GridPosition GetRandomEmptyGridPosition();
+    public interface IArena
+    {
+        int Width { get; }
+        int Height { get; }
 
-    GridPosition WorldToGrid(Vector3 worldPosition);
-    Vector3 GridToWorld(GridPosition gridPosition);
+        event Action OnArenaChanged;
+
+        TileType GetTileType(GridPosition position);
+        IEnumerable<(GridPosition position, TileType tileType)> GetAllTiles();
+        bool IsInBounds(GridPosition position);
+        GridPosition GetRandomEmptyGridPosition();
+    }
 }

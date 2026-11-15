@@ -16,6 +16,11 @@ needs every gameplay roll to come from one seed, while cosmetic rolls such as
 shake must not consume it. Grill it after the [game clock](game-clock.md),
 since a repeatable run needs both.
 
+The domain's rolls already come from one `System.Random` that `Bootstrap`
+passes to `CoinService` and `RectangleArena`, set up by the
+[ports and adapters](../adr/ports-and-adapters.md) entry. That is the starting
+point, and whether it becomes a port or a domain class is still open.
+
 ## What it would touch
 
 The domain services and models that roll, the attack factories, spawning, and

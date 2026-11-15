@@ -48,6 +48,7 @@ code in line. The [roadmap](../roadmap/README.md) holds the order.
 - [Game state](game-state.md): the states a run moves through.
 - [Grid arena](grid-arena.md): tiles, step movement and per-tile hits.
 - [Attack lifecycle](attack-lifecycle.md): stages and patterns of an attack.
+- [Application layer](application-layer.md): use cases split from the domain model, once services orchestrate.
 
 Tooling:
 

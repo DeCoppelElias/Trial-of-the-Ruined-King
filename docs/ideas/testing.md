@@ -25,3 +25,7 @@ The test assemblies and folders, and the definition of done in `AGENTS.md`.
 - Do bug verification tests stay a separate group once their bugs are fixed,
   or become ordinary tests?
 - Is there a target for how fast the EditMode suite runs?
+- Add a test that loads every attack sequence asset and asserts no step is
+  null? A rename or move of a `[SerializeReference]` type empties steps
+  silently, as the [ports and adapters](../adr/ports-and-adapters.md)
+  decision explains.

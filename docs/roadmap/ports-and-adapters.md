@@ -1,6 +1,6 @@
 # Ports and adapters
 
-Status: not started.
+Status: done.
 
 Builds the [ports and adapters](../ideas/ports-and-adapters.md) idea. Its
 grill settles the `ports-and-adapters` decision, then the code changes to

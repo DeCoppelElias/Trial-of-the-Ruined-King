@@ -1,11 +1,14 @@
-/// <summary>
-/// Represents horizontal attack directions for row attacks.
-/// </summary>
-public enum HorizontalDirection
+namespace Domain.Models
 {
-    /// <summary>Attack travels from left to right</summary>
-    LeftToRight,
-    
-    /// <summary>Attack travels from right to left</summary>
-    RightToLeft
+    /// <summary>
+    /// Represents horizontal attack directions for row attacks.
+    /// </summary>
+    public enum HorizontalDirection
+    {
+        /// <summary>Attack travels from left to right</summary>
+        LeftToRight,
+
+        /// <summary>Attack travels from right to left</summary>
+        RightToLeft
+    }
 }

@@ -1,5 +1,8 @@
-public enum PlayerState
+namespace Domain.Models
 {
-    Alive,
-    Dead
+    public enum PlayerState
+    {
+        Alive,
+        Dead
+    }
 }

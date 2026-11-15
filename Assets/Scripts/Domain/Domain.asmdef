@@ -1,3 +1,4 @@
 {
-	"name": "Domain"
+	"name": "Domain",
+	"noEngineReferences": true
 }
