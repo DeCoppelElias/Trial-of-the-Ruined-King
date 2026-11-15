@@ -18,6 +18,10 @@ obvious.
 The list below groups the topics by area, one line each. It is the map: read
 it to find which decisions bear on a piece of work.
 
+Architecture:
+
+- [Ports and adapters](ports-and-adapters.md): a Unity-free domain, driving and driven ports, adapters that never reference each other.
+
 Tooling:
 
 - [Version control](version-control.md): Git with GitHub only, Plastic removed.
