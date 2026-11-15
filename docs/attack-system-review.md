@@ -4,25 +4,10 @@ Review of the attack system (spawning, attack lifecycle, hit detection, presenta
 
 ## How findings were verified
 
-Reproduction tests live in `Assets/Tests/Bug Verification`. Each test asserts the intended behaviour, so a failing test means the bug is present. Once a bug is fixed its test turns green and stays as a regression test.
-
-- `EditMode/DomainBugTests.cs` covers death, score and attack timing in the domain services.
-- `EditMode/SpawnerBugTests.cs` covers the random attack factories and tile tracking in `PlayerAttacker`.
-- `PlayMode/SpawnerCoroutineBugTests.cs` covers wave coroutines and their timing.
-- `PlayMode/SceneBugTests.cs` loads `SampleScene` and checks the danger tile warnings.
-
-Tests in category `KnownBug` are expected to fail until fixed. Tests in `DesignQuestion` show behaviour that may or may not be intended.
-
-Run them from the Test Runner window, or from a terminal with the editor closed:
-
-    Unity.exe -batchmode -nographics -projectPath . -runTests -testPlatform EditMode -testResults editmode.xml
-    Unity.exe -batchmode -nographics -projectPath . -runTests -testPlatform PlayMode -testResults playmode.xml
-
-The build finding was checked with a Windows player build:
-
-    Unity.exe -batchmode -nographics -quit -projectPath . -buildTarget Win64 -buildWindows64Player build/Game.exe
-
-Keep `-nographics`. Without it the Unity Version Control plugin opens a login dialog nobody can see, and the run hangs forever.
+Each confirmed finding was reproduced by a test in `Assets/Tests/Bug Verification`.
+The [testing](adr/testing.md) decision removed those tests. They remain in git
+history at commit `bf30350`. The entry that fixes a finding writes its own test
+when the behaviour it restores is worth guarding.
 
 Status values:
 

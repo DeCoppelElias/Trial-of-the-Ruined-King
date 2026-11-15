@@ -44,7 +44,14 @@ The assembly names drop the `Adapter.` prefix of their folders, so `Gameplay`,
 
 ## Tests
 
-Tests live in `Assets/Tests`: domain tests in `Domain Tests`, adapter tests in
-`Adapter Tests` (EditMode, currently `ArenaSpace`), and bug verification tests
-in `Bug Verification`, split into EditMode, PlayMode and a small shared
-assembly. How to run them is in `AGENTS.md`.
+Tests live in `Assets/Tests`, one folder and assembly per assembly under test,
+as the [testing](docs/adr/testing.md) decision sets out. How to run them is in
+`AGENTS.md`.
+
+- `Domain` (`Domain.Tests`): EditMode tests of the domain models and services.
+  `Fakes` holds in-memory stand-ins for the driven ports.
+- `GamePresentation` (`GamePresentation.Tests`): EditMode tests of `ArenaSpace`.
+- `Gameplay` (`Gameplay.Tests`): an EditMode test that validates every attack
+  sequence asset.
+- `PlayMode` (`PlayMode.Tests`): the smoke test, which loads `SampleScene` and
+  starts a run.

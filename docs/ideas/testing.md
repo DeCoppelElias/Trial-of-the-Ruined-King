@@ -1,6 +1,6 @@
 # Testing
 
-Status: planned, see the [roadmap entry](../roadmap/testing.md).
+Status: built, see the [decision](../adr/testing.md).
 
 ## What it does
 
