@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator ExecuteMovement(Vector2Int direction)
     {
         _hasPendingInput = false;
-        _playerService.MovePlayer(direction);
+        _playerService.MovePlayer(ToGridDirection(direction));
         
         // Recovery phase: brief cooldown
         if (_recoveryDelay > 0f)
@@ -78,5 +78,13 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(ExecuteMovement(_pendingDirection));
         }
+    }
+
+    private static GridDirection ToGridDirection(Vector2Int direction)
+    {
+        if (direction == Vector2Int.right) return GridDirection.Right;
+        if (direction == Vector2Int.left) return GridDirection.Left;
+        if (direction == Vector2Int.up) return GridDirection.Up;
+        return GridDirection.Down;
     }
 }

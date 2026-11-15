@@ -16,13 +16,15 @@ public class ArenaPresenter : MonoBehaviour
     [SerializeField] private float _fadeDuration = 0.3f;
 
     private IArena _arena;
+    private ArenaSpace _arenaSpace;
     private bool _isInitialized;
     private Dictionary<GridPosition, GameObject> _tileInstances;
 
     public event Action OnArenaVisualized;
 
-    public void Initialize(IArena arena, IGameStateService gameStateService)
+    public void Initialize(IArena arena, ArenaSpace arenaSpace, IGameStateService gameStateService)
     {
+        _arenaSpace = arenaSpace;
         _tileInstances = new Dictionary<GridPosition, GameObject>();
         _arena = arena;
         _arena.OnArenaChanged += Visualize;
@@ -55,7 +57,7 @@ public class ArenaPresenter : MonoBehaviour
             }
 
             Vector3 localPosition = new Vector3(position.GridX, 0f, position.GridY);
-            Vector3 worldPosition = _arena.WorldPosition + localPosition;
+            Vector3 worldPosition = _arenaSpace.Origin + localPosition;
 
             int i = position.GridX + position.GridY;
             GameObject prefabToUse = (i % 2 == 0) ? _lightTilePrefab : _darkTilePrefab;
@@ -122,7 +124,7 @@ public class ArenaPresenter : MonoBehaviour
             foreach (var position in group)
             {
                 Vector3 localPosition = new Vector3(position.GridX, 0, position.GridY);
-                Vector3 worldPosition = _arena.WorldPosition + localPosition;
+                Vector3 worldPosition = _arenaSpace.Origin + localPosition;
 
                 int i = position.GridX + position.GridY;
                 GameObject prefabToUse = (i % 2 == 0) ? _lightTilePrefab : _darkTilePrefab;

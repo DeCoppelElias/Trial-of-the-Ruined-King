@@ -11,7 +11,7 @@ public interface IAttackPresentationFactoryBuilder
     /// Builds a factory for creating attack presentations.
     /// </summary>
     /// <param name="definition">The attack definition containing configuration data</param>
-    /// <param name="arena">The game arena</param>
+    /// <param name="arenaSpace">Maps arena tiles to world positions</param>
     /// <param name="parent">Parent transform for instantiated visuals</param>
     /// <param name="tileVisualizer">Visualizer for tile danger indicators</param>
     /// <param name="audioPlayer">Audio player for sound effects</param>
@@ -20,7 +20,7 @@ public interface IAttackPresentationFactoryBuilder
     /// <returns>A factory that can create attack presentations</returns>
     IAttackPresentationFactory Build(
         IAttackDefinition definition,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,

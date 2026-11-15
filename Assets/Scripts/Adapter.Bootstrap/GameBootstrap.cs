@@ -50,6 +50,8 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private Vector3 _arenaPosition = new (-1, 0, -2);
 
     private RectangleArena _arena;
+    private ArenaSpace _arenaSpace;
+    private readonly System.Random _random = new System.Random();
     private ITimeService _timeService;
     private AttackService _attackService;
     private PlayerService _playerService;
@@ -69,7 +71,8 @@ public class GameBootstrap : MonoBehaviour
         _logger = new UnityLogger();
 
         _gameStateService = new GameStateService();
-        _arena = new RectangleArena(_arenaWidth, _arenaHeight, _arenaPosition);
+        _arena = new RectangleArena(_arenaWidth, _arenaHeight, _random);
+        _arenaSpace = new ArenaSpace(_arenaPosition);
         _player = new Player(1, GetMiddleGridPosition(), _logger);
         _timeService = new TimeService(_gameStateService);
         _attackService = new AttackService(_timeService, _gameStateService);
@@ -78,13 +81,13 @@ public class GameBootstrap : MonoBehaviour
         InitializeCoinComponents();
 
         _domainUpdater.Initialize(_timeService, _gameStateService);
-        _tileVisualizer.Initialize(_arena, _arenaPresenter);
-        _attackPresenter.Initialize(_attackService, _arena, _timeService, _domainUpdater);
-        _arenaPresenter.Initialize(_arena, _gameStateService);
+        _tileVisualizer.Initialize(_arena, _arenaSpace, _arenaPresenter);
+        _attackPresenter.Initialize(_attackService, _arenaSpace, _timeService, _domainUpdater);
+        _arenaPresenter.Initialize(_arena, _arenaSpace, _gameStateService);
         _playerHitPresenter.Initialize(_timeService, _playerService);
         _arenaShaker.Initialize(_timeService);
         _playerAttacker.Initialize(_attackService, _arena, _timeService, _gameStateService);
-        _playerPresenter.Initialize(_player, _arena, _playerPrefab, _arenaPresenter, _gameStateService, _timeService, _playerService, _domainUpdater);
+        _playerPresenter.Initialize(_player, _arena, _arenaSpace, _playerPrefab, _arenaPresenter, _gameStateService, _timeService, _playerService, _domainUpdater);
         _playerPresenter.OnPlayerSpawned += OnPlayerSpawned;
         _deathPresenter.Initialize(_playerService, _cameraEffectsPresenter, _domainUpdater, _playerPresenter, _uiManager);
 
@@ -134,10 +137,10 @@ public class GameBootstrap : MonoBehaviour
 
     private void InitializeCoinComponents()
     {
-        _coinService = new CoinService(_logger, _arena, _playerService, _gameStateService);
+        _coinService = new CoinService(_logger, _arena, _playerService, _gameStateService, _random);
 
         _coinCreator.Initialize(_coinService, _gameStateService);
-        _coinsPresenter.Initialize(_arena, _audioPlayer);
+        _coinsPresenter.Initialize(_arenaSpace, _audioPlayer);
 
         _coinService.OnCoinCreated += _coinsPresenter.HandleCoinCreated;
         _coinService.OnCoinRemoved += _coinsPresenter.HandleCoinRemoved;
@@ -148,7 +151,7 @@ public class GameBootstrap : MonoBehaviour
     {
         if (!_initializeDebugComponents) return;
 
-        _debugAttackPresenter.Initialize(_attackService, _arena);
+        _debugAttackPresenter.Initialize(_attackService, _arenaSpace);
     }
 
     private void Start()

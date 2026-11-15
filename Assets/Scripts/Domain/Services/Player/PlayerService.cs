@@ -1,7 +1,6 @@
 using Domain.Models.Player;
 using Domain.Ports;
 using System;
-using UnityEngine;
 
 namespace Domain.Services
 {
@@ -66,18 +65,9 @@ namespace Domain.Services
             return _player.GridPosition;
         }
         
-        public Vector3 GetPlayerWorldPosition()
+        public void MovePlayer(GridDirection direction)
         {
-            return _arena.GridToWorld(_player.GridPosition);
-        }
-        
-        public void MovePlayer(Vector2Int direction)
-        {
-            GridPosition newPosition = new GridPosition(
-                _player.GridPosition.GridX + direction.x,
-                _player.GridPosition.GridY + direction.y
-            );
-            MovePlayer(newPosition);
+            MovePlayer(direction.ApplyTo(_player.GridPosition));
         }
 
         public void MovePlayer(GridPosition newPosition)

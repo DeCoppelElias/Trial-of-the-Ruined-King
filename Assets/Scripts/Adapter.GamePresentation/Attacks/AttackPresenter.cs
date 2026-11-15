@@ -20,7 +20,7 @@ public class AttackPresenter : MonoBehaviour
     private DomainUpdater _domainUpdator;
 
     private AttackService _attackService;
-    private IArena _arena;
+    private ArenaSpace _arenaSpace;
     private Dictionary<Attack, IAttackPresentation> _activeVisuals;
     private Dictionary<Type, IAttackPresentationFactory> _visualBehaviors;
     private IAttackPresentationFactoryBuilder _factoryBuilder;
@@ -28,10 +28,10 @@ public class AttackPresenter : MonoBehaviour
 
     public event Action<GameObject> OnAttackSpawned;
 
-    public void Initialize(AttackService attackService, IArena arena, ITimeService timeService, DomainUpdater domainUpdator)
+    public void Initialize(AttackService attackService, ArenaSpace arenaSpace, ITimeService timeService, DomainUpdater domainUpdator)
     {
         _attackService = attackService;
-        _arena = arena;
+        _arenaSpace = arenaSpace;
         _activeVisuals = new Dictionary<Attack, IAttackPresentation>();
         _factoryBuilder = new AttackPresentationFactoryBuilder();
         _timeService = timeService;
@@ -54,7 +54,7 @@ public class AttackPresenter : MonoBehaviour
         {
             IAttackPresentationFactory factory = _factoryBuilder.Build(
                 attackDefinition,
-                _arena,
+                _arenaSpace,
                 transform,
                 _tileVisualizer,
                 _audioPlayer,

@@ -10,7 +10,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
 {
     public IAttackPresentationFactory Build(
         IAttackDefinition definition,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
@@ -22,7 +22,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
             SpearRowAttackDefinition spearRow => new SpearRowPresentationFactory(
                 spearRow.visualConfig,
                 spearRow.audioConfig,
-                arena,
+                arenaSpace,
                 parent,
                 tileVisualizer,
                 audioPlayer),
@@ -30,7 +30,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
             SpearColumnAttackDefinition spearColumn => new SpearColumnPresentationFactory(
                 spearColumn.visualConfig,
                 spearColumn.audioConfig,
-                arena,
+                arenaSpace,
                 parent,
                 tileVisualizer,
                 audioPlayer),
@@ -38,7 +38,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
             HammerAttackDefinition hammer => new HammerPresentationFactory(
                 hammer.visualConfig,
                 hammer.audioConfig,
-                arena,
+                arenaSpace,
                 parent,
                 tileVisualizer,
                 arenaShaker,

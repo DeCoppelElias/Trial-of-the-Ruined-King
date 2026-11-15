@@ -9,11 +9,11 @@ public class SpearRowPresentationFactory : SpearPresentationBaseFactory
     public SpearRowPresentationFactory(
         SpearVisualConfig visualConfig,
         SpearAudioConfig audioConfig,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer)
-        : base(visualConfig, audioConfig, arena, parent, tileVisualizer, audioPlayer)
+        : base(visualConfig, audioConfig, arenaSpace, parent, tileVisualizer, audioPlayer)
     {
     }
 
@@ -21,7 +21,7 @@ public class SpearRowPresentationFactory : SpearPresentationBaseFactory
     {
         return new SpearRowPresentation(
             attack,
-            _arena,
+            _arenaSpace,
             _parent,
             _tileVisualizer,
             _audioPlayer,

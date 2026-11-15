@@ -13,10 +13,12 @@ public class TileVisualizer : MonoBehaviour
     private Dictionary<GridPosition, Tile> _tiles;
     private Dictionary<GridPosition, int> _dangerReferenceCounts;
     private IArena _arena;
+    private ArenaSpace _arenaSpace;
 
-    public void Initialize(IArena arena, ArenaPresenter arenaPresenter)
+    public void Initialize(IArena arena, ArenaSpace arenaSpace, ArenaPresenter arenaPresenter)
     {
         _arena = arena;
+        _arenaSpace = arenaSpace;
         _tiles = new Dictionary<GridPosition, Tile>();
         _dangerReferenceCounts = new Dictionary<GridPosition, int>();
 
@@ -31,7 +33,7 @@ public class TileVisualizer : MonoBehaviour
         {
             // Convert tile's world position to grid position
             Vector3 tileWorldPosition = tile.transform.position;
-            GridPosition gridPosition = _arena.WorldToGrid(tileWorldPosition);
+            GridPosition gridPosition = _arenaSpace.WorldToGrid(tileWorldPosition);
 
             // Verify the position is valid and within arena bounds
             if (_arena.IsInBounds(gridPosition))

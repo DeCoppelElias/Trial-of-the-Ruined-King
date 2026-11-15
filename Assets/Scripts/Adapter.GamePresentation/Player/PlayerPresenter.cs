@@ -9,6 +9,7 @@ public class PlayerPresenter : MonoBehaviour
     private GameObject _playerInstance;
     private Player _player;
     private IArena _arena;
+    private ArenaSpace _arenaSpace;
 
     [SerializeField] private GameObject _playerPrefab;
 
@@ -31,10 +32,11 @@ public class PlayerPresenter : MonoBehaviour
 
     public event Action<GameObject> OnPlayerSpawned;
 
-    public void Initialize(Player player, IArena arena, GameObject playerPrefab, ArenaPresenter arenaPresenter, IGameStateService gameStateService, ITimeService timeService, IPlayerService playerService, DomainUpdater domainUpdater)
+    public void Initialize(Player player, IArena arena, ArenaSpace arenaSpace, GameObject playerPrefab, ArenaPresenter arenaPresenter, IGameStateService gameStateService, ITimeService timeService, IPlayerService playerService, DomainUpdater domainUpdater)
     {
         _player = player;
         _arena = arena;
+        _arenaSpace = arenaSpace;
         _playerPrefab = playerPrefab;
         _timeService = timeService;
         _playerService = playerService;
@@ -62,7 +64,7 @@ public class PlayerPresenter : MonoBehaviour
     {
         GridPosition middleGridPosition = GetMiddleGridPosition();
 
-        Vector3 playerStartPosition = _arena.GridToWorld(middleGridPosition) + new Vector3(0, _visualYOffset, 0);
+        Vector3 playerStartPosition = _arenaSpace.GridToWorld(middleGridPosition) + new Vector3(0, _visualYOffset, 0);
 
         _playerInstance = Instantiate(_playerPrefab);
         _playerInstance.transform.position = playerStartPosition;
@@ -95,8 +97,8 @@ public class PlayerPresenter : MonoBehaviour
     {
         if (_playerInstance is null) return;
 
-        Vector3 oldWorld = _arena.GridToWorld(oldPosition) + new Vector3(0, _visualYOffset, 0);
-        Vector3 newWorld = _arena.GridToWorld(newPosition) + new Vector3(0, _visualYOffset, 0);
+        Vector3 oldWorld = _arenaSpace.GridToWorld(oldPosition) + new Vector3(0, _visualYOffset, 0);
+        Vector3 newWorld = _arenaSpace.GridToWorld(newPosition) + new Vector3(0, _visualYOffset, 0);
         Vector3 moveDir = (newWorld - oldWorld).normalized;
 
         if (_aliveRoutine != null)

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using System;
 
 public class LinearProgressivePattern : IProgressivePattern
 {
@@ -70,8 +70,8 @@ public class LinearProgressivePattern : IProgressivePattern
 
         float progress = GetProgress(state);
         int tileCount = _isRow ? _arena.Width : _arena.Height;
-        int currentTileIndex = Mathf.FloorToInt(progress * tileCount);
-        currentTileIndex = Mathf.Clamp(currentTileIndex, 0, tileCount - 1);
+        int currentTileIndex = (int)Math.Floor(progress * tileCount);
+        currentTileIndex = Math.Clamp(currentTileIndex, 0, tileCount - 1);
 
         if (_isRow)
         {

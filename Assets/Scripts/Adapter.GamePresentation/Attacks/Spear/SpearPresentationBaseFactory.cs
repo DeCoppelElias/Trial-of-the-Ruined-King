@@ -8,7 +8,7 @@ public abstract class SpearPresentationBaseFactory : IAttackPresentationFactory
 {
     protected readonly SpearVisualConfig _visualConfig;
     protected readonly SpearAudioConfig _audioConfig;
-    protected readonly IArena _arena;
+    protected readonly ArenaSpace _arenaSpace;
     protected readonly Transform _parent;
     protected readonly TileVisualizer _tileVisualizer;
     protected readonly AudioPlayer _audioPlayer;
@@ -16,14 +16,14 @@ public abstract class SpearPresentationBaseFactory : IAttackPresentationFactory
     protected SpearPresentationBaseFactory(
         SpearVisualConfig visualConfig,
         SpearAudioConfig audioConfig,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer)
     {
         _visualConfig = visualConfig;
         _audioConfig = audioConfig;
-        _arena = arena;
+        _arenaSpace = arenaSpace;
         _parent = parent;
         _tileVisualizer = tileVisualizer;
         _audioPlayer = audioPlayer;

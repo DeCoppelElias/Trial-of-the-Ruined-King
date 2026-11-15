@@ -12,7 +12,7 @@ namespace BugVerification
         [Test, Category("DesignQuestion")]
         public void B6_RandomSpears_LeaveSomeOfTheArenaFree()
         {
-            var arena = new RectangleArena(3, 4, Vector3.zero);
+            var arena = new RectangleArena(3, 4, new System.Random(0));
             var definition = ScriptableObject.CreateInstance<TestSpearRowDefinition>();
             definition.attackTiming = new AttackTiming(1f, 0.4f, 0f, 0f);
             var factory = new SpearRowAttackFactory(arena);
@@ -39,7 +39,7 @@ namespace BugVerification
         [Test, Category("KnownBug")]
         public void B6_TileStaysTracked_WhileAnotherAttackStillCoversIt()
         {
-            var arena = new RectangleArena(3, 4, Vector3.zero);
+            var arena = new RectangleArena(3, 4, new System.Random(0));
             var state = new GameStateService();
             var time = new TimeService(state);
             var attacks = new AttackService(time, state);

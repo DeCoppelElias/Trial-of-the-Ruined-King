@@ -8,6 +8,7 @@ public class CoinService : ICoinService
     private readonly IPlayerService _playerService;
     private readonly IGameStateService _gameStateService;
     private readonly ILogger _logger;
+    private readonly Random _random;
     private Coin _coin;
     
     public int CoinCount => _coin != null ? 1 : 0;
@@ -15,8 +16,9 @@ public class CoinService : ICoinService
     public event Action<Coin> OnCoinCreated;
     public event Action<Coin> OnCoinRemoved;
 
-    public CoinService(ILogger logger, IArena arena, IPlayerService playerService, IGameStateService gameStateService)
+    public CoinService(ILogger logger, IArena arena, IPlayerService playerService, IGameStateService gameStateService, Random random)
     {
+        _random = random;
         _arena = arena;
         _playerService = playerService;
         _gameStateService = gameStateService;
@@ -43,7 +45,7 @@ public class CoinService : ICoinService
             return;
         }
 
-        var randomIndex = UnityEngine.Random.Range(0, validPositions.Count);
+        var randomIndex = _random.Next(0, validPositions.Count);
         var randomPosition = validPositions[randomIndex];
 
         _coin = new Coin(randomPosition);

@@ -1,22 +1,21 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class RectangleArena : IArena
 {
     public int Width { get; private set; }
     public int Height { get; private set; }
-    public Vector3 WorldPosition { get; private set; }
 
     public event Action OnArenaChanged;
 
     private TileType[,] _tiles;
+    private readonly Random _random;
 
-    public RectangleArena(int width, int height, Vector3 worldPosition)  
+    public RectangleArena(int width, int height, Random random)
     {
         Width = width;
         Height = height;
-        WorldPosition = worldPosition;
+        _random = random;
         InitializeTiles();
     }
 
@@ -61,19 +60,6 @@ public class RectangleArena : IArena
                position.GridY >= 0 && position.GridY < Height;
     }
 
-    public GridPosition WorldToGrid(Vector3 worldPosition)
-    {
-        Vector3 localPosition = worldPosition - WorldPosition;
-        int gridX = Mathf.FloorToInt(localPosition.x);
-        int gridY = Mathf.FloorToInt(localPosition.z);
-        return new GridPosition(gridX, gridY);
-    }
-
-    public Vector3 GridToWorld(GridPosition gridPosition)
-    {
-        return WorldPosition + new Vector3(gridPosition.GridX, 0, gridPosition.GridY);
-    }
-
     public GridPosition GetRandomEmptyGridPosition()
     {
         List<GridPosition> emptyPositions = new List<GridPosition>();
@@ -94,7 +80,7 @@ public class RectangleArena : IArena
             return null;
         }
 
-        int randomIndex = UnityEngine.Random.Range(0, emptyPositions.Count);
+        int randomIndex = _random.Next(0, emptyPositions.Count);
         return emptyPositions[randomIndex];
     }
 }

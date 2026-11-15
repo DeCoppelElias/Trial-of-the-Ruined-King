@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class HammerPresentationFactory : IAttackPresentationFactory
 {
-    protected readonly IArena _arena;
+    protected readonly ArenaSpace _arenaSpace;
     protected readonly Transform _parent;
     protected readonly TileVisualizer _tileVisualizer;
     protected readonly ArenaShaker _arenaShaker;
@@ -20,7 +20,7 @@ public class HammerPresentationFactory : IAttackPresentationFactory
     public HammerPresentationFactory(
         HammerVisualConfig visualConfig,
         HammerAudioConfig audioConfig,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform transform,
         TileVisualizer tileVisualizer,
         ArenaShaker arenaShaker,
@@ -29,7 +29,7 @@ public class HammerPresentationFactory : IAttackPresentationFactory
     {
         _visualConfig = visualConfig;
         _audioConfig = audioConfig;
-        _arena = arena;
+        _arenaSpace = arenaSpace;
         _parent = transform;
         _tileVisualizer = tileVisualizer;
         _arenaShaker = arenaShaker;
@@ -42,6 +42,6 @@ public class HammerPresentationFactory : IAttackPresentationFactory
         if (attack is not HammerAttack)
             throw new System.ArgumentException("Invalid attack type for HammerPresentationFactory");
 
-        return new HammerPresentation((HammerAttack) attack, _arena, _parent, _tileVisualizer, _arenaShaker, _audioPlayer, _domainUpdator, _visualConfig, _audioConfig);
+        return new HammerPresentation((HammerAttack) attack, _arenaSpace, _parent, _tileVisualizer, _arenaShaker, _audioPlayer, _domainUpdator, _visualConfig, _audioConfig);
     }
 }

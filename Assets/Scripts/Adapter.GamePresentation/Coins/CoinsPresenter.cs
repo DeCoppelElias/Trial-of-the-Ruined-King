@@ -9,18 +9,18 @@ public class CoinsPresenter : MonoBehaviour
     [SerializeField] private float _fadeInDuration = 1f;
 
     private GameObject _coinInstance;
-    private IArena _arena;
+    private ArenaSpace _arenaSpace;
     private AudioPlayer _audioPlayer;
     
-    public void Initialize(IArena arena, AudioPlayer audioPlayer)
+    public void Initialize(ArenaSpace arenaSpace, AudioPlayer audioPlayer)
     {
-        _arena = arena;
+        _arenaSpace = arenaSpace;
         _audioPlayer = audioPlayer;
     }
 
     public void HandleCoinCreated(Coin coin)
     {
-        var worldPosition = _arena.GridToWorld(coin.Position);
+        var worldPosition = _arenaSpace.GridToWorld(coin.Position);
         var rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
         _coinInstance = Instantiate(_coinPrefab, worldPosition + new Vector3(0, 0.2f, 0), rotation, _coinContainer);
         _coinInstance.transform.localScale = new Vector3(Random.Range(0.8f, 1.2f), Random.Range(0.8f, 1.2f), Random.Range(0.8f, 1.2f));

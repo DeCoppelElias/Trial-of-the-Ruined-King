@@ -14,14 +14,14 @@ public class DebugAttackPresenter : MonoBehaviour
     [SerializeField] private Vector3 _indicatorSize = new Vector3(0.8f, 0.2f, 0.8f);
 
     [Header("References")]
-    [SerializeField] private IArena _arena;
+    private ArenaSpace _arenaSpace;
 
     private AttackService _attackService;
 
-    public void Initialize(AttackService attackService, IArena arena)
+    public void Initialize(AttackService attackService, ArenaSpace arenaSpace)
     {
         _attackService = attackService;
-        _arena = arena;
+        _arenaSpace = arenaSpace;
 
         if (_toggleAction != null)
         {
@@ -47,7 +47,7 @@ public class DebugAttackPresenter : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if (!_showDebugVisuals || _attackService == null || _arena == null) return;
+        if (!_showDebugVisuals || _attackService == null || _arenaSpace == null) return;
 
         Gizmos.color = _activeDangerColor;
 
@@ -60,7 +60,7 @@ public class DebugAttackPresenter : MonoBehaviour
 
                 foreach (GridPosition pos in activeDangerPositions)
                 {
-                    Vector3 worldPos = _arena.GridToWorld(pos);
+                    Vector3 worldPos = _arenaSpace.GridToWorld(pos);
                     worldPos.y = _indicatorHeight;
                     Gizmos.DrawCube(worldPos, _indicatorSize);
                 }

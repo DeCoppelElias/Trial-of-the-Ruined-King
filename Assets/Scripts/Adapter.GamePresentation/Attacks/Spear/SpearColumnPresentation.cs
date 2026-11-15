@@ -6,13 +6,13 @@ public class SpearColumnPresentation : SpearPresentationBase
 
     public SpearColumnPresentation(
         Attack attack,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
         SpearVisualConfig visualConfig,
         SpearAudioConfig audioConfig)
-        : base(attack, arena, parent, tileVisualizer, audioPlayer, visualConfig, audioConfig)
+        : base(attack, arenaSpace, parent, tileVisualizer, audioPlayer, visualConfig, audioConfig)
     {
         SpearColumnAttack columnAttack = attack as SpearColumnAttack;
         _direction = columnAttack != null ? columnAttack.Direction : VerticalDirection.BottomToTop;

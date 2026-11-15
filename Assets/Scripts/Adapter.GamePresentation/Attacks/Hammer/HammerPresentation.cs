@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HammerPresentation : AttackPresentationBase
 {
-    private readonly IArena _arena;
+    private readonly ArenaSpace _arenaSpace;
     private readonly Transform _parent;
     private readonly ArenaShaker _arenaShaker;
 
@@ -37,7 +37,7 @@ public class HammerPresentation : AttackPresentationBase
 
     public HammerPresentation(
         HammerAttack attack,
-        IArena arena,
+        ArenaSpace arenaSpace,
         Transform parent,
         TileVisualizer tileVisualizer,
         ArenaShaker arenaShaker,
@@ -46,7 +46,7 @@ public class HammerPresentation : AttackPresentationBase
         HammerVisualConfig visualConfig,
         HammerAudioConfig audioConfig) : base(attack, tileVisualizer, audioPlayer, audioConfig.CommitAudio)
     {
-        _arena = arena;
+        _arenaSpace = arenaSpace;
         _parent = parent;
         _arenaShaker = arenaShaker;
         _domainUpdator = domainUpdator;
@@ -109,7 +109,7 @@ public class HammerPresentation : AttackPresentationBase
 
     private void CalculateTelegraphPositions(HammerAttack attack)
     {
-        Vector3 attackMiddlePosition = _arena.GridToWorld(attack.Middle);
+        Vector3 attackMiddlePosition = _arenaSpace.GridToWorld(attack.Middle);
         float directionMultiplier = attack.Direction == HorizontalDirection.RightToLeft ? 1f : -1f;
 
         _telegraphStartPosition = attackMiddlePosition + new Vector3(
