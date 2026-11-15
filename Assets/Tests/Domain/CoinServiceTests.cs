@@ -96,13 +96,14 @@ namespace Domain.Tests
         public void LeavingGameplay_RemovesTheCoin()
         {
             _coins.CreateCoinAtRandomPosition(0);
-            int removals = 0;
-            _coins.OnCoinRemoved += c => removals++;
+            var coin = _created[0];
+            var removed = new List<Coin>();
+            _coins.OnCoinRemoved += removed.Add;
 
             _state.TransitionTo(GameState.MainMenu);
 
             Assert.AreEqual(0, _coins.CoinCount);
-            Assert.AreEqual(1, removals);
+            CollectionAssert.AreEqual(new[] { coin }, removed, "the removed coin is reported, so its visual can go");
         }
     }
 }

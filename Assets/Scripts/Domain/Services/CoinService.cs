@@ -90,8 +90,9 @@ namespace Domain.Services
         {
             if (_coin != null)
             {
+                var removedCoin = _coin;
                 _coin = null;
-                OnCoinRemoved?.Invoke(_coin);
+                OnCoinRemoved?.Invoke(removedCoin);
             }
         }
     }

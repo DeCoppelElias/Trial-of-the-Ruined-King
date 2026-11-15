@@ -21,7 +21,8 @@ namespace Domain.Services
         public void Tick(float deltaTime)
         {
             if (IsPaused) return;
-            
+
+            TotalElapsedTime += deltaTime;
             OnTick?.Invoke(deltaTime);
         }
 

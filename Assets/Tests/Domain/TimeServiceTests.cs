@@ -51,6 +51,18 @@ namespace Domain.Tests
         }
 
         [Test]
+        public void TotalElapsedTime_CountsOnlyUnpausedTicks()
+        {
+            _time.Tick(0.25f);
+            _time.Pause();
+            _time.Tick(1f);
+            _time.Resume();
+            _time.Tick(0.5f);
+
+            Assert.AreEqual(0.75f, _time.TotalElapsedTime, 1e-5f);
+        }
+
+        [Test]
         public void EnteringGameplay_Resumes()
         {
             _time.Pause();

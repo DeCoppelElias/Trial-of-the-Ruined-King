@@ -50,8 +50,8 @@ Unity 6000.3.9f1. Open the project in the Unity Editor to run it, or run the
 tests from the Test Runner window. From a terminal, close the editor first.
 `<Unity>` below is the path to that editor's `Unity.exe`.
 
-- EditMode tests: `<Unity> -batchmode -projectPath . -runTests -testPlatform EditMode -testResults editmode.xml`
-- PlayMode tests: `<Unity> -batchmode -projectPath . -runTests -testPlatform PlayMode -testResults playmode.xml`
+- EditMode tests: `<Unity> -batchmode -nographics -projectPath . -runTests -testPlatform EditMode -testResults editmode.xml`
+- PlayMode tests: `<Unity> -batchmode -nographics -projectPath . -runTests -testPlatform PlayMode -testResults playmode.xml`
 - Windows build: `<Unity> -batchmode -quit -projectPath . -buildTarget Win64 -buildWindows64Player build/Game.exe`
 
 Wait on the Unity process itself, not on its output. The AI Assistant package
