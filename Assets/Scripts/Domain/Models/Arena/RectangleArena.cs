@@ -1,86 +1,89 @@
 using System;
 using System.Collections.Generic;
 
-public class RectangleArena : IArena
+namespace Domain.Models
 {
-    public int Width { get; private set; }
-    public int Height { get; private set; }
-
-    public event Action OnArenaChanged;
-
-    private TileType[,] _tiles;
-    private readonly Random _random;
-
-    public RectangleArena(int width, int height, Random random)
+    public class RectangleArena : IArena
     {
-        Width = width;
-        Height = height;
-        _random = random;
-        InitializeTiles();
-    }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
 
-    private void InitializeTiles()
-    {
-        _tiles = new TileType[Width, Height];
-        
-        for (int x = 0; x < Width; x++)
+        public event Action OnArenaChanged;
+
+        private TileType[,] _tiles;
+        private readonly Random _random;
+
+        public RectangleArena(int width, int height, Random random)
         {
-            for (int y = 0; y < Height; y++)
-            {
-                _tiles[x, y] = TileType.Floor;
-            }
+            Width = width;
+            Height = height;
+            _random = random;
+            InitializeTiles();
         }
-    }
 
-    public TileType GetTileType(GridPosition position)
-    {
-        if (!IsInBounds(position))
+        private void InitializeTiles()
         {
-            return TileType.Empty;
-        }
-        
-        return _tiles[position.GridX, position.GridY];
-    }
+            _tiles = new TileType[Width, Height];
 
-    public IEnumerable<(GridPosition position, TileType tileType)> GetAllTiles()
-    {
-        for (int x = 0; x < Width; x++)
-        {
-            for (int y = 0; y < Height; y++)
+            for (int x = 0; x < Width; x++)
             {
-                GridPosition position = new GridPosition(x, y);
-                yield return (position, _tiles[x, y]);
-            }
-        }
-    }
-
-    public bool IsInBounds(GridPosition position)
-    {
-        return position.GridX >= 0 && position.GridX < Width && 
-               position.GridY >= 0 && position.GridY < Height;
-    }
-
-    public GridPosition GetRandomEmptyGridPosition()
-    {
-        List<GridPosition> emptyPositions = new List<GridPosition>();
-        for (int x = 0; x < Width; x++)
-        {
-            for (int y = 0; y < Height; y++)
-            {
-                GridPosition position = new GridPosition(x, y);
-                if (GetTileType(position) == TileType.Floor)
+                for (int y = 0; y < Height; y++)
                 {
-                    emptyPositions.Add(position);
+                    _tiles[x, y] = TileType.Floor;
                 }
             }
         }
 
-        if (emptyPositions.Count == 0)
+        public TileType GetTileType(GridPosition position)
         {
-            return null;
+            if (!IsInBounds(position))
+            {
+                return TileType.Empty;
+            }
+
+            return _tiles[position.GridX, position.GridY];
         }
 
-        int randomIndex = _random.Next(0, emptyPositions.Count);
-        return emptyPositions[randomIndex];
+        public IEnumerable<(GridPosition position, TileType tileType)> GetAllTiles()
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    GridPosition position = new GridPosition(x, y);
+                    yield return (position, _tiles[x, y]);
+                }
+            }
+        }
+
+        public bool IsInBounds(GridPosition position)
+        {
+            return position.GridX >= 0 && position.GridX < Width && 
+                   position.GridY >= 0 && position.GridY < Height;
+        }
+
+        public GridPosition GetRandomEmptyGridPosition()
+        {
+            List<GridPosition> emptyPositions = new List<GridPosition>();
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    GridPosition position = new GridPosition(x, y);
+                    if (GetTileType(position) == TileType.Floor)
+                    {
+                        emptyPositions.Add(position);
+                    }
+                }
+            }
+
+            if (emptyPositions.Count == 0)
+            {
+                return null;
+            }
+
+            int randomIndex = _random.Next(0, emptyPositions.Count);
+            return emptyPositions[randomIndex];
+        }
     }
 }

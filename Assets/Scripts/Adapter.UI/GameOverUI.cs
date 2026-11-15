@@ -1,3 +1,5 @@
+using Domain.Models;
+using Domain.Services;
 using System.Collections;
 using TMPro;
 using UnityEngine;

@@ -1,9 +1,12 @@
-public enum AttackStage
+namespace Domain.Models
 {
-    None,
-    Telegraph,
-    Commit,
-    Impact,
-    Recovery,
-    Complete
+    public enum AttackStage
+    {
+        None,
+        Telegraph,
+        Commit,
+        Impact,
+        Recovery,
+        Complete
+    }
 }

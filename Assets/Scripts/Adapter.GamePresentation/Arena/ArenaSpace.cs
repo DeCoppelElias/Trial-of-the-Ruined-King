@@ -1,3 +1,4 @@
+using Domain.Models;
 using UnityEngine;
 
 /// <summary>

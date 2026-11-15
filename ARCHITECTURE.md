@@ -8,28 +8,43 @@ that moves, adds or removes an assembly or a port.
 
 ## Code layout
 
-The code follows ports and adapters. `Assets/Scripts/Domain` is the game's
-rules in plain C#. Each `Assets/Scripts/Adapter.*` folder is its own assembly
-that depends on the domain and connects it to Unity. The domain still uses a
-few Unity types; the [ports and adapters](docs/roadmap/ports-and-adapters.md)
-entry settles that.
+The code follows the [ports and adapters](docs/adr/ports-and-adapters.md)
+decision. `Assets/Scripts/Domain` is the game's rules in plain C# with no Unity
+references. Each `Assets/Scripts/Adapter.*` folder is its own assembly that
+depends on the domain and connects it to Unity. Adapters reference only the
+domain, Unity packages and `Shared`, except `Bootstrap`, which references
+everything.
 
-- `Domain`: models, services, and the interfaces in `Domain/Ports`.
-- `Adapter.Bootstrap`: `GameBootstrap`, which builds and wires everything.
+- `Domain`: one namespace per layer.
+  - `Domain/Models` (`Domain.Models`): the arena, attacks, player, coin and
+    game state.
+  - `Domain/Services` (`Domain.Services`): the services behind the driving
+    ports.
+  - `Domain/Ports/Driving` (`Domain.Ports.Driving`): the domain's API, which
+    adapters call. The services implement it.
+  - `Domain/Ports/Driven` (`Domain.Ports.Driven`): `IStorage` and `ILogger`,
+    which adapters implement.
+- `Adapter.Bootstrap`: `GameBootstrap`, which builds and wires everything. It
+  also bridges presentation to `DomainUpdater` for the time scale and to the UI
+  for the game over screen.
 - `Adapter.Gameplay`: `DomainUpdater`, which ticks the domain, plus spawning
   and the attack factories.
-- `Adapter.GamePresentation`: everything the player sees and hears of a run.
+- `Adapter.GamePresentation`: everything the player sees and hears of a run,
+  including `ArenaSpace`, which maps tiles to world positions.
 - `Adapter.Player`: player input and movement.
 - `Adapter.UI`: menus, stats and the game over screen.
-- `Adapter.Shared`: attack definitions used by gameplay and presentation.
 - `Adapter.PlayerPrefsStorage`: implements `IStorage` with PlayerPrefs.
 - `Adapter.UnityLogging`: implements `ILogger` with the Unity console.
+- `Shared`: a library, not an adapter. It holds the attack definitions used by
+  gameplay and presentation.
 - `Assets/Scripts/Editor`: inspector drawers.
-- `Assets/Scripts/Other`: loose scene scripts outside any assembly, such as
-  `FloatingMovement`.
+
+The assembly names drop the `Adapter.` prefix of their folders, so `Gameplay`,
+`GamePresentation` and so on.
 
 ## Tests
 
-Tests live in `Assets/Tests`: domain tests in `Domain Tests`, and bug
-verification tests in `Bug Verification`, split into EditMode, PlayMode and a
-small shared assembly. How to run them is in `AGENTS.md`.
+Tests live in `Assets/Tests`: domain tests in `Domain Tests`, adapter tests in
+`Adapter Tests` (EditMode, currently `ArenaSpace`), and bug verification tests
+in `Bug Verification`, split into EditMode, PlayMode and a small shared
+assembly. How to run them is in `AGENTS.md`.

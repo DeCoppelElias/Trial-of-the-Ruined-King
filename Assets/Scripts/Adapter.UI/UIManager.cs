@@ -1,3 +1,4 @@
+using Domain.Models;
 using Domain.Ports.Driving;
 using Domain.Ports.Driven;
 using ILogger = Domain.Ports.Driven.ILogger;

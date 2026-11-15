@@ -1,23 +1,26 @@
 using System.Collections.Generic;
 
-public class GridPositionEqualityComparer : IEqualityComparer<GridPosition>
+namespace Domain.Models
 {
-    public bool Equals(GridPosition x, GridPosition y)
+    public class GridPositionEqualityComparer : IEqualityComparer<GridPosition>
     {
-        if (x == null && y == null) return true;
-        if (x == null || y == null) return false;
-        return x.GridX == y.GridX && x.GridY == y.GridY;
-    }
-
-    public int GetHashCode(GridPosition obj)
-    {
-        if (obj == null) return 0;
-        unchecked
+        public bool Equals(GridPosition x, GridPosition y)
         {
-            int hash = 17;
-            hash = hash * 31 + obj.GridX.GetHashCode();
-            hash = hash * 31 + obj.GridY.GetHashCode();
-            return hash;
+            if (x == null && y == null) return true;
+            if (x == null || y == null) return false;
+            return x.GridX == y.GridX && x.GridY == y.GridY;
+        }
+
+        public int GetHashCode(GridPosition obj)
+        {
+            if (obj == null) return 0;
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 31 + obj.GridX.GetHashCode();
+                hash = hash * 31 + obj.GridY.GetHashCode();
+                return hash;
+            }
         }
     }
 }

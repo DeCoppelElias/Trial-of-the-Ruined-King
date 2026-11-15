@@ -1,3 +1,4 @@
+using Domain.Models;
 using NUnit.Framework;
 using System.Linq;
 

@@ -1,6 +1,6 @@
+using Domain.Models;
 using Domain.Ports.Driven;
 using System.Collections.Generic;
-using Domain.Models.Player;
 using Domain.Services;
 using NUnit.Framework;
 using UnityEngine;

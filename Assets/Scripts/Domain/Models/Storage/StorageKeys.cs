@@ -1,5 +1,8 @@
-public enum StorageKeys
+namespace Domain.Models
 {
-    Highscore,
-    Gold,
+    public enum StorageKeys
+    {
+        Highscore,
+        Gold,
+    }
 }

@@ -1,5 +1,8 @@
-public enum TileType
+namespace Domain.Models
 {
-    Empty,
-    Floor
+    public enum TileType
+    {
+        Empty,
+        Floor
+    }
 }

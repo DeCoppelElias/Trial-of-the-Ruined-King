@@ -1,94 +1,98 @@
+using Domain.Models;
 using Domain.Ports.Driving;
 using Domain.Ports.Driven;
 using System;
 using System.Linq;
 
-public class CoinService : ICoinService
+namespace Domain.Services
 {
-    private readonly IArena _arena;
-    private readonly IPlayerService _playerService;
-    private readonly IGameStateService _gameStateService;
-    private readonly ILogger _logger;
-    private readonly Random _random;
-    private Coin _coin;
-    
-    public int CoinCount => _coin != null ? 1 : 0;
-
-    public event Action<Coin> OnCoinCreated;
-    public event Action<Coin> OnCoinRemoved;
-
-    public CoinService(ILogger logger, IArena arena, IPlayerService playerService, IGameStateService gameStateService, Random random)
+    public class CoinService : ICoinService
     {
-        _random = random;
-        _arena = arena;
-        _playerService = playerService;
-        _gameStateService = gameStateService;
-        _logger = logger;
+        private readonly IArena _arena;
+        private readonly IPlayerService _playerService;
+        private readonly IGameStateService _gameStateService;
+        private readonly ILogger _logger;
+        private readonly Random _random;
+        private Coin _coin;
 
-        _playerService.OnPlayerMove += HandlePlayerMoved;
-        _gameStateService.OnStateChanged += HandleStateChanged;
-    }
+        public int CoinCount => _coin != null ? 1 : 0;
 
-    public void CreateCoinAtRandomPosition(float minManhattanDistanceFromPlayer)
-    {
-        var playerPosition = _playerService.GetPlayerGridPosition();
-        var allTiles = _arena.GetAllTiles();
+        public event Action<Coin> OnCoinCreated;
+        public event Action<Coin> OnCoinRemoved;
 
-        var validPositions = allTiles
-            .Where(tile => tile.tileType == TileType.Floor)
-            .Where(tile => CalculateManhattanDistance(playerPosition, tile.position) >= minManhattanDistanceFromPlayer)
-            .Select(tile => tile.position)
-            .ToList();
-
-        if (validPositions.Count == 0)
+        public CoinService(ILogger logger, IArena arena, IPlayerService playerService, IGameStateService gameStateService, Random random)
         {
-            _logger.LogWarning("No valid positions available to spawn a coin.");
-            return;
+            _random = random;
+            _arena = arena;
+            _playerService = playerService;
+            _gameStateService = gameStateService;
+            _logger = logger;
+
+            _playerService.OnPlayerMove += HandlePlayerMoved;
+            _gameStateService.OnStateChanged += HandleStateChanged;
         }
 
-        var randomIndex = _random.Next(0, validPositions.Count);
-        var randomPosition = validPositions[randomIndex];
-
-        _coin = new Coin(randomPosition);
-        OnCoinCreated?.Invoke(_coin);
-    }
-
-    private float CalculateManhattanDistance(GridPosition pos1, GridPosition pos2)
-    {
-        var dx = Math.Abs(pos1.GridX - pos2.GridX);
-        var dy = Math.Abs(pos1.GridY - pos2.GridY);
-        return dx + dy;
-    }
-
-    private void HandlePlayerMoved(GridPosition _, GridPosition gridPosition)
-    {
-        if (_coin == null) return;
-
-        if (gridPosition.Equals(_coin.Position))
+        public void CreateCoinAtRandomPosition(float minManhattanDistanceFromPlayer)
         {
-            var collectedCoin = _coin;
-            _coin = null;
-            
-            _playerService.GivePlayerGold(1);
-            
-            OnCoinRemoved?.Invoke(collectedCoin);
+            var playerPosition = _playerService.GetPlayerGridPosition();
+            var allTiles = _arena.GetAllTiles();
+
+            var validPositions = allTiles
+                .Where(tile => tile.tileType == TileType.Floor)
+                .Where(tile => CalculateManhattanDistance(playerPosition, tile.position) >= minManhattanDistanceFromPlayer)
+                .Select(tile => tile.position)
+                .ToList();
+
+            if (validPositions.Count == 0)
+            {
+                _logger.LogWarning("No valid positions available to spawn a coin.");
+                return;
+            }
+
+            var randomIndex = _random.Next(0, validPositions.Count);
+            var randomPosition = validPositions[randomIndex];
+
+            _coin = new Coin(randomPosition);
+            OnCoinCreated?.Invoke(_coin);
         }
-    }
 
-    private void HandleStateChanged(GameState previousState, GameState newState)
-    {
-        if (previousState == GameState.Gameplay && newState != GameState.Gameplay)
+        private float CalculateManhattanDistance(GridPosition pos1, GridPosition pos2)
         {
-            HandleExitGameplay();
+            var dx = Math.Abs(pos1.GridX - pos2.GridX);
+            var dy = Math.Abs(pos1.GridY - pos2.GridY);
+            return dx + dy;
         }
-    }
 
-    private void HandleExitGameplay()
-    {
-        if (_coin != null)
+        private void HandlePlayerMoved(GridPosition _, GridPosition gridPosition)
         {
-            _coin = null;
-            OnCoinRemoved?.Invoke(_coin);
+            if (_coin == null) return;
+
+            if (gridPosition.Equals(_coin.Position))
+            {
+                var collectedCoin = _coin;
+                _coin = null;
+
+                _playerService.GivePlayerGold(1);
+
+                OnCoinRemoved?.Invoke(collectedCoin);
+            }
+        }
+
+        private void HandleStateChanged(GameState previousState, GameState newState)
+        {
+            if (previousState == GameState.Gameplay && newState != GameState.Gameplay)
+            {
+                HandleExitGameplay();
+            }
+        }
+
+        private void HandleExitGameplay()
+        {
+            if (_coin != null)
+            {
+                _coin = null;
+                OnCoinRemoved?.Invoke(_coin);
+            }
         }
     }
 }

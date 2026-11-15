@@ -1,3 +1,4 @@
+using Domain.Models;
 using System.Collections.Generic;
 
 public interface IAttackFactory

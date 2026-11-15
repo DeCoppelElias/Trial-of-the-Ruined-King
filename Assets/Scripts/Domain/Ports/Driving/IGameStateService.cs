@@ -1,3 +1,4 @@
+using Domain.Models;
 using System;
 
 namespace Domain.Ports.Driving

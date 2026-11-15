@@ -4,7 +4,7 @@ using Domain.Ports.Driven;
 
 using System;
 
-namespace Domain.Models.Player
+namespace Domain.Models
 {
     public class Player
     {

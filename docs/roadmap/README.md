@@ -12,7 +12,7 @@ Foundations: each entry settles one decision and brings the code in line. New
 features start once these are done.
 
 2. [Version control](version-control.md) done.
-3. [Ports and adapters](ports-and-adapters.md) in progress.
+3. [Ports and adapters](ports-and-adapters.md) done.
 4. [Testing](testing.md) not started.
 5. [Game clock](game-clock.md) not started.
 6. [Randomness](randomness.md) not started.

@@ -28,5 +28,9 @@ Unity stores the assembly and namespace of every `[SerializeReference]` type
 inside the asset, so renaming the `Gameplay` assembly or moving its sequence
 step parameters to a namespace empties those steps unless the assets are
 rewritten too. That is why the assembly names do not carry an `Adapter.`
-prefix, and why adapters stay in the global namespace while the domain has
-namespaces that follow its folders.
+prefix, and why adapters stay in the global namespace.
+
+The domain has one namespace per layer: `Domain.Models`, `Domain.Services`,
+`Domain.Ports.Driving` and `Domain.Ports.Driven`. Namespaces that followed
+every folder would share names with types inside them, such as `Attack`, and
+C# then resolves the name to the namespace.
