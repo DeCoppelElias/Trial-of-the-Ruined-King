@@ -1,6 +1,6 @@
 # Attack system review
 
-Review of the attack system (spawning, attack lifecycle, hit detection, presentation) as of commit `eb5eaec`, 2026-11-10. Nothing here is fixed yet. Each finding has an ID so it can be picked up later.
+Review of the attack system (spawning, attack lifecycle, hit detection, presentation) as of commit `eb5eaec`, 2026-11-10. A finding fixed since is marked so where it is described. Each finding has an ID so it can be picked up later.
 
 ## How findings were verified
 
@@ -166,7 +166,7 @@ Severity low. Latent.
 
 ### N5. Dead code and leftovers
 
-- `TimeService.TotalElapsedTime` is never updated and is always 0.
+- `TimeService.TotalElapsedTime` is never updated and is always 0. Fixed by the [testing](roadmap/testing.md) entry.
 - `AttackPresenter._commitAudioEvent` is serialized but never used.
 - `AttackPresenter.RegisterVisualBehavior` and `AttackFactoryRegistry.CreateSpecificAttack` have no callers.
 - `DebugAttackPresenter` has `[SerializeField] private IArena _arena`. Unity cannot serialize interfaces, so the field never shows in the inspector.
