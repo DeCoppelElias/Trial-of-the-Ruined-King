@@ -1,4 +1,4 @@
-using Domain.Ports;
+using Domain.Ports.Driving;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +17,9 @@ public class AttackPresenter : MonoBehaviour
     [SerializeField] private List<AttackDefinitionBase> _attackDefinitions = new List<AttackDefinitionBase>();
 
     private ITimeService _timeService;
-    private DomainUpdater _domainUpdator;
+    private Func<float> _timeScale;
 
-    private AttackService _attackService;
+    private IAttackService _attackService;
     private ArenaSpace _arenaSpace;
     private Dictionary<Attack, IAttackPresentation> _activeVisuals;
     private Dictionary<Type, IAttackPresentationFactory> _visualBehaviors;
@@ -28,14 +28,14 @@ public class AttackPresenter : MonoBehaviour
 
     public event Action<GameObject> OnAttackSpawned;
 
-    public void Initialize(AttackService attackService, ArenaSpace arenaSpace, ITimeService timeService, DomainUpdater domainUpdator)
+    public void Initialize(IAttackService attackService, ArenaSpace arenaSpace, ITimeService timeService, Func<float> timeScale)
     {
         _attackService = attackService;
         _arenaSpace = arenaSpace;
         _activeVisuals = new Dictionary<Attack, IAttackPresentation>();
         _factoryBuilder = new AttackPresentationFactoryBuilder();
         _timeService = timeService;
-        _domainUpdator = domainUpdator;
+        _timeScale = timeScale;
 
         InitializeVisualBehaviors();
         
@@ -59,7 +59,7 @@ public class AttackPresenter : MonoBehaviour
                 _tileVisualizer,
                 _audioPlayer,
                 _arenaShaker,
-                _domainUpdator);
+                _timeScale);
             _visualBehaviors[attackDefinition.AttackType] = factory;
         }
     }

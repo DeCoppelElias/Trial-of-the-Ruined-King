@@ -1,5 +1,6 @@
+using Domain.Ports.Driving;
+using Domain.Ports.Driven;
 using Domain.Models.Player;
-using Domain.Ports;
 using System;
 
 namespace Domain.Services

@@ -1,7 +1,7 @@
+using Domain.Ports.Driving;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Ports;
 using UnityEngine;
 
 public class PlayerAttacker : MonoBehaviour
@@ -28,7 +28,7 @@ public class PlayerAttacker : MonoBehaviour
     [SerializeField, Range(0f, 1f), Tooltip("Probability of spawning random attacks (0 = only sequences, 1 = only random)")]
     private float _randomAttackWeight = 0.7f;
 
-    private AttackService _attackService;
+    private IAttackService _attackService;
     private IArena _arena;
     private ITimeService _timeService;
     private float _timeSinceLastAttack;
@@ -44,7 +44,7 @@ public class PlayerAttacker : MonoBehaviour
 
     private AttackFactoryRegistry _attackFactory;
 
-    public void Initialize(AttackService attackService, IArena arena, ITimeService timeService, IGameStateService gameStateService)
+    public void Initialize(IAttackService attackService, IArena arena, ITimeService timeService, IGameStateService gameStateService)
     {
         _attackService = attackService;
         _arena = arena;

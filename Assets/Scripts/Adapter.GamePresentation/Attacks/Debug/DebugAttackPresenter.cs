@@ -1,3 +1,4 @@
+using Domain.Ports.Driving;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,9 +17,9 @@ public class DebugAttackPresenter : MonoBehaviour
     [Header("References")]
     private ArenaSpace _arenaSpace;
 
-    private AttackService _attackService;
+    private IAttackService _attackService;
 
-    public void Initialize(AttackService attackService, ArenaSpace arenaSpace)
+    public void Initialize(IAttackService attackService, ArenaSpace arenaSpace)
     {
         _attackService = attackService;
         _arenaSpace = arenaSpace;

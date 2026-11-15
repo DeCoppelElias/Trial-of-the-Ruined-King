@@ -1,4 +1,4 @@
-using Domain.Ports;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ public class HammerPresentationFactory : IAttackPresentationFactory
     protected readonly TileVisualizer _tileVisualizer;
     protected readonly ArenaShaker _arenaShaker;
     protected readonly AudioPlayer _audioPlayer;
-    protected readonly DomainUpdater _domainUpdator;
+    protected readonly Func<float> _timeScale;
 
     protected readonly HammerVisualConfig _visualConfig;
     protected readonly HammerAudioConfig _audioConfig;
@@ -25,7 +25,7 @@ public class HammerPresentationFactory : IAttackPresentationFactory
         TileVisualizer tileVisualizer,
         ArenaShaker arenaShaker,
         AudioPlayer audioPlayer,
-        DomainUpdater domainUpdator)
+        Func<float> timeScale)
     {
         _visualConfig = visualConfig;
         _audioConfig = audioConfig;
@@ -34,7 +34,7 @@ public class HammerPresentationFactory : IAttackPresentationFactory
         _tileVisualizer = tileVisualizer;
         _arenaShaker = arenaShaker;
         _audioPlayer = audioPlayer;
-        _domainUpdator = domainUpdator;
+        _timeScale = timeScale;
     }
 
     public IAttackPresentation CreatePresentation(Attack attack)
@@ -42,6 +42,6 @@ public class HammerPresentationFactory : IAttackPresentationFactory
         if (attack is not HammerAttack)
             throw new System.ArgumentException("Invalid attack type for HammerPresentationFactory");
 
-        return new HammerPresentation((HammerAttack) attack, _arenaSpace, _parent, _tileVisualizer, _arenaShaker, _audioPlayer, _domainUpdator, _visualConfig, _audioConfig);
+        return new HammerPresentation((HammerAttack) attack, _arenaSpace, _parent, _tileVisualizer, _arenaShaker, _audioPlayer, _timeScale, _visualConfig, _audioConfig);
     }
 }

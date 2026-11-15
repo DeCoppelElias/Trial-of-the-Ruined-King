@@ -1,6 +1,6 @@
+using Domain.Ports.Driving;
 using System;
 using System.Collections.Generic;
-using Domain.Ports;
 
 public class AttackService : IAttackService
 {

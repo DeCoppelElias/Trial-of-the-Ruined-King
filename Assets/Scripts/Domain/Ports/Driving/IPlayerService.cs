@@ -1,7 +1,7 @@
 using Domain.Models.Player;
 using System;
 
-namespace Domain.Ports
+namespace Domain.Ports.Driving
 {
     public interface IPlayerService
     {

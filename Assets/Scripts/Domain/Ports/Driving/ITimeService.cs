@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Ports
+namespace Domain.Ports.Driving
 {
     public interface ITimeService
     {

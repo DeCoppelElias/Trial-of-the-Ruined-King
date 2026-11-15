@@ -1,4 +1,5 @@
-using Domain.Ports;
+using Domain.Ports.Driving;
+using Domain.Ports.Driven;
 
 public class PlayerStatsPersistence : IPlayerStatsPersistence
 {

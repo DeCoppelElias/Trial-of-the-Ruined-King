@@ -1,4 +1,3 @@
-using Domain.Ports;
 using System;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
         ArenaShaker arenaShaker,
-        DomainUpdater domainUpdator)
+        Func<float> timeScale)
     {
         return definition switch
         {
@@ -43,7 +42,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
                 tileVisualizer,
                 arenaShaker,
                 audioPlayer,
-                domainUpdator),
+                timeScale),
 
             _ => throw new NotSupportedException($"No factory builder implementation for attack definition type: {definition.GetType().Name}")
         };

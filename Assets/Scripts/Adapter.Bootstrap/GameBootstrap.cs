@@ -1,5 +1,7 @@
+using Domain.Ports.Driving;
+using Domain.Ports.Driven;
+using ILogger = Domain.Ports.Driven.ILogger;
 using Domain.Models.Player;
-using Domain.Ports;
 using Domain.Services;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -82,20 +84,33 @@ public class GameBootstrap : MonoBehaviour
 
         _domainUpdater.Initialize(_timeService, _gameStateService);
         _tileVisualizer.Initialize(_arena, _arenaSpace, _arenaPresenter);
-        _attackPresenter.Initialize(_attackService, _arenaSpace, _timeService, _domainUpdater);
+        _attackPresenter.Initialize(_attackService, _arenaSpace, _timeService, ReadTimeScale);
         _arenaPresenter.Initialize(_arena, _arenaSpace, _gameStateService);
         _playerHitPresenter.Initialize(_timeService, _playerService);
         _arenaShaker.Initialize(_timeService);
         _playerAttacker.Initialize(_attackService, _arena, _timeService, _gameStateService);
-        _playerPresenter.Initialize(_player, _arena, _arenaSpace, _playerPrefab, _arenaPresenter, _gameStateService, _timeService, _playerService, _domainUpdater);
+        _playerPresenter.Initialize(_player, _arena, _arenaSpace, _playerPrefab, _arenaPresenter, _gameStateService, _timeService, _playerService, ReadTimeScale);
         _playerPresenter.OnPlayerSpawned += OnPlayerSpawned;
-        _deathPresenter.Initialize(_playerService, _cameraEffectsPresenter, _domainUpdater, _playerPresenter, _uiManager);
+        _deathPresenter.Initialize(_playerService, _cameraEffectsPresenter, SetTimeScale, _playerPresenter);
+        _deathPresenter.OnDeathSequenceFinished += ShowGameOver;
 
         InitializeUIComponents();
         InitializeDebugComponents();
 
         _timeService.Pause();
         _uiManager.ShowMainMenu();
+    }
+
+    // Bridges between adapters. Presentation may not reference Gameplay or UI,
+    // so the composition root connects them until the game clock and game over
+    // state entries give these a home in the domain.
+    private float ReadTimeScale() => _domainUpdater.CurrentTimeScale;
+
+    private void SetTimeScale(float scale, float duration) => _domainUpdater.SetTimeScale(scale, duration);
+
+    private void ShowGameOver()
+    {
+        _uiManager.ShowGameOver(_playerService.Gold, _playerService.Score, _playerService.Score == _playerService.HighScore);
     }
 
     private void OnPlayerSpawned(GameObject obj)
