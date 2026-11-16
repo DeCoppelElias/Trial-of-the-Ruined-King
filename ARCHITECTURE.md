@@ -25,10 +25,10 @@ everything.
   - `Domain/Ports/Driven` (`Domain.Ports.Driven`): `IStorage` and `ILogger`,
     which adapters implement.
 - `Adapter.Bootstrap`: `GameBootstrap`, which builds and wires everything. It
-  also bridges presentation to `DomainUpdater` for the time scale and to the UI
-  for the game over screen.
-- `Adapter.Gameplay`: `DomainUpdater`, which ticks the domain, plus spawning
-  and the attack factories.
+  also bridges presentation to the UI for the game over screen.
+- `Adapter.Gameplay`: `DomainUpdater`, which feeds the game clock real time and
+  copies its speed into `Time.timeScale`, plus spawning and the attack
+  factories.
 - `Adapter.GamePresentation`: everything the player sees and hears of a run,
   including `ArenaSpace`, which maps tiles to world positions.
 - `Adapter.Player`: player input and movement.

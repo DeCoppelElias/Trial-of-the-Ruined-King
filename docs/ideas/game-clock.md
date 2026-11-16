@@ -1,6 +1,6 @@
 # Game clock
 
-Status: planned, see the [roadmap entry](../roadmap/game-clock.md).
+Status: built, see the [game clock](../adr/game-clock.md) decision.
 
 ## What it does
 
