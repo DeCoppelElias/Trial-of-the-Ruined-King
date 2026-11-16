@@ -19,7 +19,7 @@ namespace Domain.Tests
         {
             _arena = new RectangleArena(3, 4, new System.Random(0));
             _state = new GameStateService();
-            _time = new TimeService(_state);
+            _time = TestClock.Create(_state);
             _attacks = new AttackService(_time, _state);
             _state.TransitionTo(GameState.Gameplay);
         }
@@ -51,7 +51,7 @@ namespace Domain.Tests
             var hammer = Hammer();
             _attacks.SpawnAttack(hammer);
 
-            _time.Tick(1f);
+            _time.Advance(1f);
 
             Assert.AreEqual(AttackStage.Commit, hammer.CurrentStage);
         }
@@ -64,7 +64,7 @@ namespace Domain.Tests
             _attacks.OnAttackCompleted += completed.Add;
             _attacks.SpawnAttack(hammer);
 
-            for (int i = 0; i < 4; i++) _time.Tick(1f);
+            for (int i = 0; i < 4; i++) _time.Advance(1f);
 
             CollectionAssert.IsEmpty(_attacks.GetActiveAttacks());
             CollectionAssert.AreEqual(new[] { hammer }, completed);
@@ -83,8 +83,8 @@ namespace Domain.Tests
         {
             var hammer = Hammer();
             _attacks.SpawnAttack(hammer);
-            _time.Tick(1f);
-            _time.Tick(1f);
+            _time.Advance(1f);
+            _time.Advance(1f);
 
             Assert.IsTrue(_attacks.CheckPlayerHit(new GridPosition(1, 1)));
             Assert.IsTrue(hammer.HasDealtDamage);
@@ -96,8 +96,8 @@ namespace Domain.Tests
         {
             _attacks.SpawnAttack(Hammer());
             _attacks.SpawnAttack(Hammer());
-            _time.Tick(1f);
-            _time.Tick(1f);
+            _time.Advance(1f);
+            _time.Advance(1f);
 
             Assert.IsTrue(_attacks.CheckPlayerHit(new GridPosition(1, 1)));
             Assert.IsTrue(_attacks.CheckPlayerHit(new GridPosition(1, 1)));

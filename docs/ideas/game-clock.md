@@ -1,6 +1,6 @@
 # Game clock
 
-Status: planned, see the [roadmap entry](../roadmap/game-clock.md).
+Status: built, see the [game clock](../adr/game-clock.md) decision.
 
 ## What it does
 
@@ -15,7 +15,7 @@ several pick wrong. Spawning runs on Unity time (B5). Hit stop pauses the
 domain but leaves the scale at 1, so the hammer Animator and the player
 animations, which follow the scale, keep moving through it, and hammer impact
 particles follow no game clock at all. One pause flag serves every pauser
-(N2), and `TotalElapsedTime` is never advanced. See the
+(N2). See the
 [attack system review](../attack-system-review.md).
 
 [Spawning in the domain](domain-spawning.md),

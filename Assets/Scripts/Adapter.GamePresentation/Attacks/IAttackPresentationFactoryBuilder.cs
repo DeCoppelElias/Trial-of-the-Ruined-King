@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 /// <summary>
@@ -16,7 +15,6 @@ public interface IAttackPresentationFactoryBuilder
     /// <param name="tileVisualizer">Visualizer for tile danger indicators</param>
     /// <param name="audioPlayer">Audio player for sound effects</param>
     /// <param name="arenaShaker">Shaker for arena shake effects</param>
-    /// <param name="timeScale">Reads the current game time scale</param>
     /// <returns>A factory that can create attack presentations</returns>
     IAttackPresentationFactory Build(
         IAttackDefinition definition,
@@ -24,6 +22,5 @@ public interface IAttackPresentationFactoryBuilder
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
-        ArenaShaker arenaShaker,
-        Func<float> timeScale);
+        ArenaShaker arenaShaker);
 }

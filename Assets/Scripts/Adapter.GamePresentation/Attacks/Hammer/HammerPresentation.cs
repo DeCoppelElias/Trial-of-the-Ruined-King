@@ -11,13 +11,11 @@ public class HammerPresentation : AttackPresentationBase
 
     private readonly HammerVisualConfig _visualConfig;
     private readonly HammerAudioConfig _audioConfig;
-    private readonly System.Func<float> _timeScale;
 
     private Renderer _renderer;
     private Animator _animator;
     private ParticleSystem _impactParticles;
     private HorizontalDirection _direction;
-    private float _baseAnimatorSpeed = 1f;
 
     private Vector3 _telegraphStartPosition;
     private Vector3 _telegraphEndPosition;
@@ -42,14 +40,12 @@ public class HammerPresentation : AttackPresentationBase
         TileVisualizer tileVisualizer,
         ArenaShaker arenaShaker,
         AudioPlayer audioPlayer,
-        System.Func<float> timeScale,
         HammerVisualConfig visualConfig,
         HammerAudioConfig audioConfig) : base(attack, tileVisualizer, audioPlayer, audioConfig.CommitAudio)
     {
         _arenaSpace = arenaSpace;
         _parent = parent;
         _arenaShaker = arenaShaker;
-        _timeScale = timeScale;
 
         _visualConfig = visualConfig;
         _audioConfig = audioConfig;
@@ -82,8 +78,6 @@ public class HammerPresentation : AttackPresentationBase
     {
         if (_instance == null)
             return;
-
-        if (_animator != null) _animator.speed = _baseAnimatorSpeed * _timeScale();
 
         float elapsed = attack.ElapsedTimeInStage;
 
@@ -239,8 +233,7 @@ public class HammerPresentation : AttackPresentationBase
         var clip = GetAnimationClip(clipName);
 
         float animationLength = clip.length;
-        _baseAnimatorSpeed = animationLength / stageDuration;
-        _animator.speed = _baseAnimatorSpeed * _timeScale();
+        _animator.speed = animationLength / stageDuration;
     }
 
     private AnimationClip GetAnimationClip(string clipName)

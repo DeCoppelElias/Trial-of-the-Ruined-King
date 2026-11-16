@@ -13,8 +13,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
         Transform parent,
         TileVisualizer tileVisualizer,
         AudioPlayer audioPlayer,
-        ArenaShaker arenaShaker,
-        Func<float> timeScale)
+        ArenaShaker arenaShaker)
     {
         return definition switch
         {
@@ -41,8 +40,7 @@ public class AttackPresentationFactoryBuilder : IAttackPresentationFactoryBuilde
                 parent,
                 tileVisualizer,
                 arenaShaker,
-                audioPlayer,
-                timeScale),
+                audioPlayer),
 
             _ => throw new NotSupportedException($"No factory builder implementation for attack definition type: {definition.GetType().Name}")
         };

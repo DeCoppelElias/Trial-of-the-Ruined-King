@@ -81,31 +81,26 @@ public class GameBootstrap : MonoBehaviour
         InitializePlayerComponents();
         InitializeCoinComponents();
 
-        _domainUpdater.Initialize(_timeService, _gameStateService);
+        _domainUpdater.Initialize(_timeService);
         _tileVisualizer.Initialize(_arena, _arenaSpace, _arenaPresenter);
-        _attackPresenter.Initialize(_attackService, _arenaSpace, _timeService, ReadTimeScale);
+        _attackPresenter.Initialize(_attackService, _arenaSpace);
         _arenaPresenter.Initialize(_arena, _arenaSpace, _gameStateService);
         _playerHitPresenter.Initialize(_timeService, _playerService);
         _arenaShaker.Initialize(_timeService);
         _playerAttacker.Initialize(_attackService, _arena, _timeService, _gameStateService);
-        _playerPresenter.Initialize(_player, _arena, _arenaSpace, _playerPrefab, _arenaPresenter, _gameStateService, _timeService, _playerService, ReadTimeScale);
+        _playerPresenter.Initialize(_player, _arena, _arenaSpace, _playerPrefab, _arenaPresenter, _gameStateService, _timeService, _playerService);
         _playerPresenter.OnPlayerSpawned += OnPlayerSpawned;
-        _deathPresenter.Initialize(_playerService, _cameraEffectsPresenter, SetTimeScale, _playerPresenter);
+        _deathPresenter.Initialize(_playerService, _cameraEffectsPresenter, _timeService, _playerPresenter);
         _deathPresenter.OnDeathSequenceFinished += ShowGameOver;
 
         InitializeUIComponents();
         InitializeDebugComponents();
 
-        _timeService.Pause();
         _uiManager.ShowMainMenu();
     }
 
-    // Bridges between adapters. Presentation may not reference Gameplay or UI,
-    // so the composition root connects them until the game clock and game over
-    // state entries give these a home in the domain.
-    private float ReadTimeScale() => _domainUpdater.CurrentTimeScale;
-
-    private void SetTimeScale(float scale, float duration) => _domainUpdater.SetTimeScale(scale, duration);
+    // Bridges between adapters. Presentation may not reference UI, so the composition
+    // root connects them until the game over state entry gives this a home in the domain.
 
     private void ShowGameOver()
     {

@@ -16,7 +16,7 @@ namespace Domain.Tests
         {
             var arena = new RectangleArena(3, 4, new System.Random(0));
             var state = new GameStateService();
-            var time = new TimeService(state);
+            var time = TestClock.Create(state);
             _player = new PlayerService(new Player(1, new GridPosition(1, 1)), arena, new AttackService(time, state), time);
             _storage = new MemoryStorage();
             _persistence = new PlayerStatsPersistence(_player, _storage);
