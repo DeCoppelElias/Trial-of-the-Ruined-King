@@ -23,3 +23,5 @@ into `GameStateService` and the clock differently. Grill it after the
 
 - A flat list of states, or nested ones, such as paused inside gameplay?
 - Who may request a change, and can a change be refused?
+- Do moves made during a pause count, are they dropped, or are they held until
+  the pause ends? Today a move still reaches the domain during hit stop.
