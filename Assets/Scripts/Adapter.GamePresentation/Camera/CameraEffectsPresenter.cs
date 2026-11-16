@@ -51,13 +51,16 @@ public class CameraEffectsPresenter : MonoBehaviour
         _isZooming = true;
         _isZoomingIn = true;
     }
+
+    // Real time: the camera is the player's view, so a shake plays through hit stop
+    // and the death zoom plays at full speed while the world slows.
     private void Update()
     {
         if (_camera == null) return;
 
         if (_shakeElapsed < _shakeDuration)
         {
-            _shakeElapsed += Time.deltaTime;
+            _shakeElapsed += Time.unscaledDeltaTime;
             float x = Random.Range(-1f, 1f) * _shakeMagnitude;
             float y = Random.Range(-1f, 1f) * _shakeMagnitude;
             _camera.transform.localPosition = _originalPosition + new Vector3(x, y, 0f);
@@ -68,7 +71,7 @@ public class CameraEffectsPresenter : MonoBehaviour
 
         if (_isZooming)
         {
-            _zoomElapsed += Time.deltaTime;
+            _zoomElapsed += Time.unscaledDeltaTime;
 
             if (_isZoomingIn)
             {

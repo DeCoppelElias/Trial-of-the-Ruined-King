@@ -15,7 +15,6 @@ public class PlayerPresenter : MonoBehaviour
 
     private ITimeService _timeService;
     private IPlayerService _playerService;
-    private Func<float> _timeScale;
 
     private Coroutine _aliveRoutine;
     private Vector3 _originalScale;
@@ -32,7 +31,7 @@ public class PlayerPresenter : MonoBehaviour
 
     public event Action<GameObject> OnPlayerSpawned;
 
-    public void Initialize(Player player, IArena arena, ArenaSpace arenaSpace, GameObject playerPrefab, ArenaPresenter arenaPresenter, IGameStateService gameStateService, ITimeService timeService, IPlayerService playerService, Func<float> timeScale)
+    public void Initialize(Player player, IArena arena, ArenaSpace arenaSpace, GameObject playerPrefab, ArenaPresenter arenaPresenter, IGameStateService gameStateService, ITimeService timeService, IPlayerService playerService)
     {
         _player = player;
         _arena = arena;
@@ -40,7 +39,6 @@ public class PlayerPresenter : MonoBehaviour
         _playerPrefab = playerPrefab;
         _timeService = timeService;
         _playerService = playerService;
-        _timeScale = timeScale;
 
         arenaPresenter.OnArenaVisualized += OnArenaVisualized;
         gameStateService.OnStateChanged += OnStateChange;
@@ -123,7 +121,7 @@ public class PlayerPresenter : MonoBehaviour
         float windUpElapsed = 0f;
         while (windUpElapsed < _windUpDelay)
         {
-            windUpElapsed += Time.deltaTime * _timeScale();
+            windUpElapsed += Time.deltaTime;
             yield return null;
         }
 
@@ -135,7 +133,7 @@ public class PlayerPresenter : MonoBehaviour
         float dodgePhase = _dodgeDuration * 0.65f;
         while (elapsed < dodgePhase)
         {
-            elapsed += Time.deltaTime * _timeScale();
+            elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / dodgePhase);
             t = 1f - (1f - t) * (1f - t); // Ease-out
 
@@ -152,7 +150,7 @@ public class PlayerPresenter : MonoBehaviour
         float snapBackPhase = _dodgeDuration * 0.35f;
         while (elapsed < snapBackPhase)
         {
-            elapsed += Time.deltaTime * _timeScale();
+            elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / snapBackPhase);
             t = t * t; // Ease-in
 
@@ -203,7 +201,7 @@ public class PlayerPresenter : MonoBehaviour
 
         while (timer < bounceDuration)
         {
-            timer += Time.deltaTime * _timeScale();
+            timer += Time.deltaTime;
             float t = timer / bounceDuration;
 
             float bounce = Mathf.Sin(t * Mathf.PI) * 0.1f;
@@ -221,10 +219,11 @@ public class PlayerPresenter : MonoBehaviour
         Quaternion targetRotation = startRotation * Quaternion.Euler(-90f, 0f, 0f);
         
         float elapsed = 0f;
-        
+
+        // Real time: the fall plays at full speed while the world slows down around it.
         while (elapsed < deathFallDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / deathFallDuration);
             
             float easedT = 1f - Mathf.Pow(1f - t, 3f);
@@ -242,7 +241,7 @@ public class PlayerPresenter : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
-            elapsed += Time.deltaTime * _timeScale();
+            elapsed += Time.deltaTime;
             float alpha = Mathf.Clamp01(elapsed / duration);
             SetPlayerAlpha(alpha);
             yield return null;

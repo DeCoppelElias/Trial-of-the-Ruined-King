@@ -17,9 +17,6 @@ public class AttackPresenter : MonoBehaviour
     [Header("Attacks")]
     [SerializeField] private List<AttackDefinitionBase> _attackDefinitions = new List<AttackDefinitionBase>();
 
-    private ITimeService _timeService;
-    private Func<float> _timeScale;
-
     private IAttackService _attackService;
     private ArenaSpace _arenaSpace;
     private Dictionary<Attack, IAttackPresentation> _activeVisuals;
@@ -29,20 +26,17 @@ public class AttackPresenter : MonoBehaviour
 
     public event Action<GameObject> OnAttackSpawned;
 
-    public void Initialize(IAttackService attackService, ArenaSpace arenaSpace, ITimeService timeService, Func<float> timeScale)
+    public void Initialize(IAttackService attackService, ArenaSpace arenaSpace)
     {
         _attackService = attackService;
         _arenaSpace = arenaSpace;
         _activeVisuals = new Dictionary<Attack, IAttackPresentation>();
         _factoryBuilder = new AttackPresentationFactoryBuilder();
-        _timeService = timeService;
-        _timeScale = timeScale;
 
         InitializeVisualBehaviors();
         
         _attackService.OnAttackAdded += OnAttackAdded;
         _attackService.OnAttackCompleted += OnAttackCompleted;
-        _timeService.OnTick += OnTick;
 
         _initialized = true;
     }
@@ -59,8 +53,7 @@ public class AttackPresenter : MonoBehaviour
                 transform,
                 _tileVisualizer,
                 _audioPlayer,
-                _arenaShaker,
-                _timeScale);
+                _arenaShaker);
             _visualBehaviors[attackDefinition.AttackType] = factory;
         }
     }
@@ -76,7 +69,8 @@ public class AttackPresenter : MonoBehaviour
         ClearVisualization();
     }
 
-    private void OnTick(float deltaTime)
+    // Every frame, not every clock step: a frame can hold several steps or none.
+    private void Update()
     {
         if (_initialized) UpdateAllAttackVisuals();
     }

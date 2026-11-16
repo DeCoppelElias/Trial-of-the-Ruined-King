@@ -1,5 +1,4 @@
 using Domain.Ports.Driving;
-using System.Collections;
 using UnityEngine;
 
 public class PlayerHitPresenter : MonoBehaviour
@@ -31,13 +30,7 @@ public class PlayerHitPresenter : MonoBehaviour
     {
         _audioPlayer.Play(_hitAudio);
         _cameraShaker.ShakeCamera(_cameraShakeDuration, _cameraShakeMagnitude);
-        StartCoroutine(PauseCoroutine(_timePauseDuration));
-    }
-
-    private IEnumerator PauseCoroutine(float duration)
-    {
-        _timeService.Pause();
-        yield return new WaitForSeconds(duration);
-        _timeService.Resume();
+        // The clock counts the length in real time and ends the pause itself.
+        _timeService.Pause(_timePauseDuration);
     }
 }

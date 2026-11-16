@@ -5,7 +5,8 @@ using System.Collections;
 
 public class DeathPresenter : MonoBehaviour
 {
-    [Header("Time Slow Settings")]
+    [Header("Slow Motion Settings")]
+    [Tooltip("Real seconds for game time to slow from full speed to a stop")]
     [SerializeField] private float _slowMotionDuration = 5.0f;
 
     [Header("Death Animation Settings")]   
@@ -20,7 +21,7 @@ public class DeathPresenter : MonoBehaviour
     [Header("Game Over UI Settings")]
     [SerializeField] private float _gameOverUIDelay = 2.5f;
 
-    private Action<float, float> _setTimeScale;
+    private ITimeService _timeService;
     private IPlayerService _playerService;
     private CameraEffectsPresenter _cameraEffectsPresenter;
     private PlayerPresenter _playerPresenter;
@@ -30,11 +31,11 @@ public class DeathPresenter : MonoBehaviour
     /// </summary>
     public event Action OnDeathSequenceFinished;
 
-    public void Initialize(IPlayerService playerService, CameraEffectsPresenter cameraEffectsPresenter, Action<float, float> setTimeScale, PlayerPresenter playerPresenter)
+    public void Initialize(IPlayerService playerService, CameraEffectsPresenter cameraEffectsPresenter, ITimeService timeService, PlayerPresenter playerPresenter)
     {
         _playerService = playerService;
         _cameraEffectsPresenter = cameraEffectsPresenter;
-        _setTimeScale = setTimeScale;
+        _timeService = timeService;
         _playerPresenter = playerPresenter;
 
         _playerService.OnPlayerDied += HandlePlayerDeath;
@@ -42,7 +43,8 @@ public class DeathPresenter : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
-        _setTimeScale(0, _slowMotionDuration);
+        // The clock drops this hold when the run ends, so it is never released here.
+        _timeService.SlowTo(0f, _slowMotionDuration);
         _cameraEffectsPresenter.ZoomAndRotateCamera(_zoomInDuration, _zoomOutDuration, _zoomAmount, _rotationAmount);
         _playerPresenter.PlayDeathAnimation(_deathFallDuration);
 
