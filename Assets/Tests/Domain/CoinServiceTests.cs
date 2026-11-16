@@ -22,7 +22,7 @@ namespace Domain.Tests
         {
             _arena = new RectangleArena(3, 4, new Random(0));
             _state = new GameStateService();
-            var time = new TimeService(_state);
+            var time = TestClock.Create(_state);
             _player = new PlayerService(new Player(1, _start), _arena, new AttackService(time, _state), time);
             _logger = new RecordingLogger();
             _coins = new CoinService(_logger, _arena, _player, _state, new Random(0));

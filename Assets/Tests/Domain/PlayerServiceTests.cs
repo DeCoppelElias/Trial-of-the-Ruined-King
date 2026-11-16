@@ -21,7 +21,7 @@ namespace Domain.Tests
             // Same wiring order as GameBootstrap.Awake, same arena size as the scene.
             _arena = new RectangleArena(3, 4, new System.Random(0));
             _state = new GameStateService();
-            _time = new TimeService(_state);
+            _time = TestClock.Create(_state);
             _attacks = new AttackService(_time, _state);
             _player = new PlayerService(new Player(1, _start), _arena, _attacks, _time);
             _state.TransitionTo(GameState.Gameplay);
@@ -69,9 +69,9 @@ namespace Domain.Tests
             _player.OnPlayerDied += () => deaths++;
             SpawnHammerAt(1, 1);
 
-            _time.Tick(1f);
-            _time.Tick(1f);
-            _time.Tick(0.1f);
+            _time.Advance(1f);
+            _time.Advance(1f);
+            _time.Advance(0.1f);
 
             Assert.AreEqual(1, hits);
             Assert.AreEqual(1, deaths);
@@ -86,7 +86,7 @@ namespace Domain.Tests
             _player.OnPlayerAttackHit += () => hits++;
             SpawnHammerAt(0, 3);
 
-            for (int i = 0; i < 4; i++) _time.Tick(1f);
+            for (int i = 0; i < 4; i++) _time.Advance(1f);
 
             Assert.AreEqual(0, hits);
             Assert.IsTrue(_player.IsPlayerAlive());
@@ -98,9 +98,9 @@ namespace Domain.Tests
             int hits = 0;
             _player.OnPlayerAttackHit += () => hits++;
             SpawnHammerAt(1, 3);
-            _time.Tick(1f);
-            _time.Tick(1f);
-            _time.Tick(0.1f);
+            _time.Advance(1f);
+            _time.Advance(1f);
+            _time.Advance(0.1f);
             Assume.That(hits, Is.EqualTo(0));
 
             _player.MovePlayer(GridDirection.Up);
@@ -113,7 +113,7 @@ namespace Domain.Tests
         {
             SpawnHammerAt(0, 3);
 
-            for (int i = 0; i < 4; i++) _time.Tick(1f);
+            for (int i = 0; i < 4; i++) _time.Advance(1f);
 
             Assert.AreEqual(1, _player.Score);
         }
