@@ -23,6 +23,8 @@ The game:
 - [Accessibility](accessibility.md): options for reading attacks.
 - [Tutorial and end card](tutorial-and-end-card.md): the start and end of the demo loop.
 - [Demo scope](demo-scope.md): what the PC demo must prove, with the original vision document.
+- [Attack effects](attack-effects.md): trails, glows, particles and decals that sell each stage.
+- [Sword sweep](sword-sweep.md): a fast sword that sweeps three edge tiles.
 
 From the attack system review:
 
