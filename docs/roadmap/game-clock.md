@@ -1,6 +1,6 @@
 # Game clock
 
-Status: not started.
+Status: in progress.
 
 Builds the [game clock](../ideas/game-clock.md) idea. Its grill settles the
 `game-clock` decision, then the code changes to follow it fully. It depends on

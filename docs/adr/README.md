@@ -21,6 +21,7 @@ it to find which decisions bear on a piece of work.
 Architecture:
 
 - [Ports and adapters](ports-and-adapters.md): a Unity-free domain, driving and driven ports, adapters that never reference each other.
+- [Game clock](game-clock.md): the domain owns game time, tickets for pauses and speed, fixed steps, game time or real time stated for every timer.
 - [Testing](testing.md): EditMode tests for every domain rule, one PlayMode smoke test, test assemblies that mirror the code.
 
 Tooling:

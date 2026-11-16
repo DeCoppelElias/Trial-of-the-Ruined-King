@@ -14,7 +14,7 @@ features start once these are done.
 2. [Version control](version-control.md) done.
 3. [Ports and adapters](ports-and-adapters.md) done.
 4. [Testing](testing.md) done.
-5. [Game clock](game-clock.md) not started.
+5. [Game clock](game-clock.md) in progress.
 6. [Randomness](randomness.md) not started.
 7. [Domain events](domain-events.md) not started.
 8. [Composition root](composition-root.md) not started.

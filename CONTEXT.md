@@ -33,6 +33,26 @@ How hard the run is at the moment. It rises over the course of a run.
 A phase of a run with its own environment and set of attacks, unlocked by reaching a high enough score.
 _Avoid_: stage, level, zone, biome
 
+### Time
+
+**Game time**:
+Time as the run experiences it. It slows in slow motion and stops in a pause.
+_Avoid_: scaled time
+
+**Real time**:
+Time as the player experiences it. It never slows or stops.
+_Avoid_: unscaled time
+
+**Pause**:
+A run frozen mid-play, such as hit stop or a pause menu. The main menu is never a pause, since no run exists there.
+_Avoid_: freeze
+
+**Hit stop**:
+The short pause when the player is hit.
+
+**Slow motion**:
+Game time running slower than real time, such as during a death.
+
 ### Attacks
 
 **Attack**:

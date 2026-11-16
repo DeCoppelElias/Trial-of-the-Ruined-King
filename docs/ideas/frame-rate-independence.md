@@ -21,4 +21,4 @@ The attack stage timing, and the spear pattern.
 ## Open questions
 
 - It shifts every attack's timing slightly. Retune afterwards, or accept it?
-- Fixed timestep and leftover time are clock and stage questions. Grill after the [game clock](game-clock.md) and the [attack lifecycle](attack-lifecycle.md).
+- The [game clock](../adr/game-clock.md) decision gives the domain fixed steps. Leftover time between stages is a stage question. Grill after the [attack lifecycle](attack-lifecycle.md).
