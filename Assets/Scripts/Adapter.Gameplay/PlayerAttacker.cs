@@ -44,12 +44,14 @@ public class PlayerAttacker : MonoBehaviour
     private float _difficultyElapsed;
 
     private AttackFactoryRegistry _attackFactory;
+    private RandomSource _runRandom;
 
-    public void Initialize(IAttackService attackService, IArena arena, ITimeService timeService, IGameStateService gameStateService)
+    public void Initialize(IAttackService attackService, IArena arena, ITimeService timeService, IGameStateService gameStateService, RandomSource runRandom)
     {
         _attackService = attackService;
         _arena = arena;
         _timeService = timeService;
+        _runRandom = runRandom;
         _initialized = true;
         _isSpawning = false;
 
@@ -70,9 +72,9 @@ public class PlayerAttacker : MonoBehaviour
     private void InitializeAttackFactories()
     {
         _attackFactory = new AttackFactoryRegistry();
-        _attackFactory.Register(typeof(SpearRowAttack), new SpearRowAttackFactory(_arena));
-        _attackFactory.Register(typeof(SpearColumnAttack), new SpearColumnAttackFactory(_arena));
-        _attackFactory.Register(typeof(HammerAttack), new HammerAttackFactory(_arena));
+        _attackFactory.Register(typeof(SpearRowAttack), new SpearRowAttackFactory(_arena, _runRandom));
+        _attackFactory.Register(typeof(SpearColumnAttack), new SpearColumnAttackFactory(_arena, _runRandom));
+        _attackFactory.Register(typeof(HammerAttack), new HammerAttackFactory(_arena, _runRandom));
     }
 
     private void ValidateAttackSequences()
@@ -209,7 +211,7 @@ public class PlayerAttacker : MonoBehaviour
             return false;
 
         // Use weighted random to decide
-        float roll = Random.value;
+        float roll = _runRandom.Value();
         return roll > _randomAttackWeight; // Higher weight = more random, lower chance of sequence
     }
 
@@ -221,7 +223,7 @@ public class PlayerAttacker : MonoBehaviour
         }
 
         // Select random sequence
-        var sequence = _attackSequences[Random.Range(0, _attackSequences.Count)];
+        var sequence = _runRandom.Pick(_attackSequences);
         if (sequence == null || sequence.steps == null || sequence.steps.Count == 0)
         {
             yield break;
@@ -268,7 +270,7 @@ public class PlayerAttacker : MonoBehaviour
 
     private IEnumerator SpawnMultipleAttacksWithDelay()
     {
-        int attackCount = Random.Range(_minSimultaneousAttacks, _maxSimultaneousAttacks + 1);
+        int attackCount = _runRandom.Range(_minSimultaneousAttacks, _maxSimultaneousAttacks + 1);
 
         for (int i = 0; i < attackCount; i++)
         {
@@ -276,7 +278,7 @@ public class PlayerAttacker : MonoBehaviour
 
             if (i < attackCount - 1)
             {
-                float delay = Random.Range(_minAttackOffset, _maxAttackOffset);
+                float delay = _runRandom.Range(_minAttackOffset, _maxAttackOffset);
                 yield return new WaitForSeconds(delay);
             }
         }
@@ -287,7 +289,7 @@ public class PlayerAttacker : MonoBehaviour
         if (_attackDefinitions == null || _attackDefinitions.Count == 0)
             return;
 
-        var definition = _attackDefinitions[Random.Range(0, _attackDefinitions.Count)];
+        var definition = _runRandom.Pick(_attackDefinitions);
         var attack = _attackFactory.CreateRandomAttack(definition, _attackTimingMultiplier, _attackedTiles, _minFreePercentage);
 
         if (attack == null)

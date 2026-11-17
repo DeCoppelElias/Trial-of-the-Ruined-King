@@ -87,7 +87,7 @@ public class GameBootstrap : MonoBehaviour
         _arenaPresenter.Initialize(_arena, _arenaSpace, _gameStateService);
         _playerHitPresenter.Initialize(_timeService, _playerService);
         _arenaShaker.Initialize(_timeService);
-        _playerAttacker.Initialize(_attackService, _arena, _timeService, _gameStateService);
+        _playerAttacker.Initialize(_attackService, _arena, _timeService, _gameStateService, _runRandom);
         _playerPresenter.Initialize(_player, _arena, _arenaSpace, _playerPrefab, _arenaPresenter, _gameStateService, _timeService, _playerService);
         _playerPresenter.OnPlayerSpawned += OnPlayerSpawned;
         _deathPresenter.Initialize(_playerService, _cameraEffectsPresenter, _timeService, _playerPresenter);
