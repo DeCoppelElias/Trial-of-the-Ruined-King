@@ -16,10 +16,11 @@ domain, Unity packages and `Shared`, except `Bootstrap`, which references
 everything.
 
 - `Domain`: one namespace per layer.
-  - `Domain/Models` (`Domain.Models`): the arena, attacks, player, coin and
-    game state.
+  - `Domain/Models` (`Domain.Models`): the arena, attacks, player, coin, game
+    state and `RandomSource`, which every roll in the game goes through.
   - `Domain/Services` (`Domain.Services`): the services behind the driving
-    ports.
+    ports, and `RunSeeder`, which reseeds the run's `RandomSource` when a run
+    starts.
   - `Domain/Ports/Driving` (`Domain.Ports.Driving`): the domain's API, which
     adapters call. The services implement it.
   - `Domain/Ports/Driven` (`Domain.Ports.Driven`): `IStorage` and `ILogger`,
@@ -51,7 +52,8 @@ as the [testing](docs/adr/testing.md) decision sets out. How to run them is in
 - `Domain` (`Domain.Tests`): EditMode tests of the domain models and services.
   `Fakes` holds in-memory stand-ins for the driven ports.
 - `GamePresentation` (`GamePresentation.Tests`): EditMode tests of `ArenaSpace`.
-- `Gameplay` (`Gameplay.Tests`): an EditMode test that validates every attack
-  sequence asset.
+- `Gameplay` (`Gameplay.Tests`): EditMode tests that validate every attack
+  sequence asset and check that each attack factory builds the same attacks
+  from the same seed.
 - `PlayMode` (`PlayMode.Tests`): the smoke test, which loads `SampleScene` and
   starts a run.

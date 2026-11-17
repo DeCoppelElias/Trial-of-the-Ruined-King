@@ -1,6 +1,6 @@
 # Randomness
 
-Status: planned, see the [roadmap entry](../roadmap/randomness.md).
+Status: built, see the [randomness](../adr/randomness.md) decision.
 
 ## What it does
 
