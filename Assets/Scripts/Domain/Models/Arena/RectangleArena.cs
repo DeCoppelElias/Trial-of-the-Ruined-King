@@ -82,8 +82,7 @@ namespace Domain.Models
                 return null;
             }
 
-            int randomIndex = _random.Range(0, emptyPositions.Count);
-            return emptyPositions[randomIndex];
+            return _random.Pick(emptyPositions);
         }
     }
 }

@@ -8,13 +8,13 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private bool logSuppressedSounds = false;
 
     private readonly Dictionary<AudioEvent, float> _lastPlayTimes = new();
+    private readonly Dictionary<AudioEvent, Queue<AudioSource>> _pools = new();
     private RandomSource _cosmeticRandom;
 
     public void Initialize(RandomSource cosmeticRandom)
     {
         _cosmeticRandom = cosmeticRandom;
     }
-    private readonly Dictionary<AudioEvent, Queue<AudioSource>> _pools = new();
 
     public void Play(AudioEvent audioEvent)
     {

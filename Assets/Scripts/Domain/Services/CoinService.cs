@@ -49,10 +49,7 @@ namespace Domain.Services
                 return;
             }
 
-            var randomIndex = _random.Range(0, validPositions.Count);
-            var randomPosition = validPositions[randomIndex];
-
-            _coin = new Coin(randomPosition);
+            _coin = new Coin(_random.Pick(validPositions));
             OnCoinCreated?.Invoke(_coin);
         }
 
