@@ -17,7 +17,7 @@ namespace Domain.Tests
         [SetUp]
         public void SetUp()
         {
-            _arena = new RectangleArena(3, 4, new System.Random(0));
+            _arena = new RectangleArena(3, 4, new RandomSource(0));
             _state = new GameStateService();
             _time = TestClock.Create(_state);
             _attacks = new AttackService(_time, _state);

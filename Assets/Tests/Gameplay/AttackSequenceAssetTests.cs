@@ -33,7 +33,7 @@ namespace Gameplay.Tests
         public void Sequence_IsValid(string path)
         {
             var sequence = AssetDatabase.LoadAssetAtPath<AttackSequenceDefinition>(path);
-            var arena = new RectangleArena(ArenaWidth, ArenaHeight, new System.Random(0));
+            var arena = new RectangleArena(ArenaWidth, ArenaHeight, new RandomSource(0));
 
             Assert.IsTrue(sequence.Validate(arena, out string error), error);
         }

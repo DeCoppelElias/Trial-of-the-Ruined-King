@@ -52,7 +52,7 @@ public class GameBootstrap : MonoBehaviour
 
     private RectangleArena _arena;
     private ArenaSpace _arenaSpace;
-    private readonly System.Random _random = new System.Random();
+    private readonly RandomSource _runRandom = new RandomSource(RandomSource.NewSeed());
     private ITimeService _timeService;
     private AttackService _attackService;
     private PlayerService _playerService;
@@ -72,7 +72,7 @@ public class GameBootstrap : MonoBehaviour
         _logger = new UnityLogger();
 
         _gameStateService = new GameStateService();
-        _arena = new RectangleArena(_arenaWidth, _arenaHeight, _random);
+        _arena = new RectangleArena(_arenaWidth, _arenaHeight, _runRandom);
         _arenaSpace = new ArenaSpace(_arenaPosition);
         _player = new Player(1, GetMiddleGridPosition(), _logger);
         _timeService = new TimeService(_gameStateService);
@@ -146,7 +146,7 @@ public class GameBootstrap : MonoBehaviour
 
     private void InitializeCoinComponents()
     {
-        _coinService = new CoinService(_logger, _arena, _playerService, _gameStateService, _random);
+        _coinService = new CoinService(_logger, _arena, _playerService, _gameStateService, _runRandom);
 
         _coinCreator.Initialize(_coinService, _gameStateService);
         _coinsPresenter.Initialize(_arenaSpace, _audioPlayer);

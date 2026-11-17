@@ -10,7 +10,7 @@ namespace Domain.Tests
         [Test]
         public void Constructor_InitializesProperties()
         {
-            var arena = new RectangleArena(5, 7, new System.Random(0));
+            var arena = new RectangleArena(5, 7, new RandomSource(0));
 
             Assert.AreEqual(5, arena.Width);
             Assert.AreEqual(7, arena.Height);
@@ -19,7 +19,7 @@ namespace Domain.Tests
         [Test]
         public void Constructor_InitializesAllTilesAsFloor()
         {
-            var arena = new RectangleArena(3, 4, new System.Random(0));
+            var arena = new RectangleArena(3, 4, new RandomSource(0));
 
             var allTiles = arena.GetAllTiles().ToList();
 
@@ -32,7 +32,7 @@ namespace Domain.Tests
         [Test]
         public void IsInBounds_ReturnsTrueForValidPosition()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             Assert.IsTrue(arena.IsInBounds(new GridPosition(2, 2)));
             Assert.IsTrue(arena.IsInBounds(new GridPosition(0, 0)));
@@ -42,7 +42,7 @@ namespace Domain.Tests
         [Test]
         public void IsInBounds_ReturnsTrueForAllCorners()
         {
-            var arena = new RectangleArena(3, 4, new System.Random(0));
+            var arena = new RectangleArena(3, 4, new RandomSource(0));
 
             Assert.IsTrue(arena.IsInBounds(new GridPosition(0, 0)), "Bottom-left corner");
             Assert.IsTrue(arena.IsInBounds(new GridPosition(2, 0)), "Bottom-right corner");
@@ -53,7 +53,7 @@ namespace Domain.Tests
         [Test]
         public void IsInBounds_ReturnsFalseForNegativeX()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             Assert.IsFalse(arena.IsInBounds(new GridPosition(-1, 2)));
             Assert.IsFalse(arena.IsInBounds(new GridPosition(-10, 0)));
@@ -62,7 +62,7 @@ namespace Domain.Tests
         [Test]
         public void IsInBounds_ReturnsFalseForNegativeY()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             Assert.IsFalse(arena.IsInBounds(new GridPosition(2, -1)));
             Assert.IsFalse(arena.IsInBounds(new GridPosition(0, -5)));
@@ -71,7 +71,7 @@ namespace Domain.Tests
         [Test]
         public void IsInBounds_ReturnsFalseForXBeyondWidth()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             Assert.IsFalse(arena.IsInBounds(new GridPosition(5, 2)));
             Assert.IsFalse(arena.IsInBounds(new GridPosition(10, 0)));
@@ -80,7 +80,7 @@ namespace Domain.Tests
         [Test]
         public void IsInBounds_ReturnsFalseForYBeyondHeight()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             Assert.IsFalse(arena.IsInBounds(new GridPosition(2, 5)));
             Assert.IsFalse(arena.IsInBounds(new GridPosition(0, 10)));
@@ -89,7 +89,7 @@ namespace Domain.Tests
         [Test]
         public void IsInBounds_ReturnsFalseForBothOutOfBounds()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             Assert.IsFalse(arena.IsInBounds(new GridPosition(-1, -1)));
             Assert.IsFalse(arena.IsInBounds(new GridPosition(5, 5)));
@@ -103,7 +103,7 @@ namespace Domain.Tests
         [Test]
         public void GetTileType_ReturnsFloorForValidPositions()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             Assert.AreEqual(TileType.Floor, arena.GetTileType(new GridPosition(0, 0)));
             Assert.AreEqual(TileType.Floor, arena.GetTileType(new GridPosition(2, 2)));
@@ -113,7 +113,7 @@ namespace Domain.Tests
         [Test]
         public void GetTileType_ReturnsEmptyForOutOfBounds()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             Assert.AreEqual(TileType.Empty, arena.GetTileType(new GridPosition(-1, 0)));
             Assert.AreEqual(TileType.Empty, arena.GetTileType(new GridPosition(0, -1)));
@@ -129,7 +129,7 @@ namespace Domain.Tests
         [Test]
         public void GetAllTiles_ReturnsCorrectCount()
         {
-            var arena = new RectangleArena(3, 4, new System.Random(0));
+            var arena = new RectangleArena(3, 4, new RandomSource(0));
 
             var tiles = arena.GetAllTiles().ToList();
 
@@ -139,7 +139,7 @@ namespace Domain.Tests
         [Test]
         public void GetAllTiles_ReturnsAllPositions()
         {
-            var arena = new RectangleArena(3, 2, new System.Random(0));
+            var arena = new RectangleArena(3, 2, new RandomSource(0));
 
             var tiles = arena.GetAllTiles().ToList();
             var positions = tiles.Select(t => t.position).ToList();
@@ -155,7 +155,7 @@ namespace Domain.Tests
         [Test]
         public void GetAllTiles_AllTilesAreFloor()
         {
-            var arena = new RectangleArena(5, 5, new System.Random(0));
+            var arena = new RectangleArena(5, 5, new RandomSource(0));
 
             var tiles = arena.GetAllTiles().ToList();
 
@@ -165,7 +165,7 @@ namespace Domain.Tests
         [Test]
         public void GetAllTiles_CoversEntireArenaGrid()
         {
-            var arena = new RectangleArena(4, 3, new System.Random(0));
+            var arena = new RectangleArena(4, 3, new RandomSource(0));
 
             var tiles = arena.GetAllTiles().ToList();
 
@@ -189,7 +189,7 @@ namespace Domain.Tests
         [Test]
         public void Arena_WithSingleTile_WorksCorrectly()
         {
-            var arena = new RectangleArena(1, 1, new System.Random(0));
+            var arena = new RectangleArena(1, 1, new RandomSource(0));
 
             Assert.AreEqual(1, arena.Width);
             Assert.AreEqual(1, arena.Height);
@@ -202,7 +202,7 @@ namespace Domain.Tests
         [Test]
         public void Arena_WithAsymmetricDimensions_WorksCorrectly()
         {
-            var arena = new RectangleArena(2, 5, new System.Random(0));
+            var arena = new RectangleArena(2, 5, new RandomSource(0));
 
             Assert.IsTrue(arena.IsInBounds(new GridPosition(1, 4)));
             Assert.IsFalse(arena.IsInBounds(new GridPosition(2, 4)));
@@ -210,6 +210,16 @@ namespace Domain.Tests
             Assert.AreEqual(10, arena.GetAllTiles().Count());
         }
 
+
+        [Test]
+        public void RandomEmptyPosition_WithTheSameSeed_IsTheSame()
+        {
+            var a = new RectangleArena(5, 5, new RandomSource(11));
+            var b = new RectangleArena(5, 5, new RandomSource(11));
+
+            for (int i = 0; i < 20; i++)
+                Assert.AreEqual(a.GetRandomEmptyGridPosition(), b.GetRandomEmptyGridPosition());
+        }
 
         #endregion
     }

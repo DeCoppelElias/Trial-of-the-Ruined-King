@@ -20,12 +20,12 @@ namespace Domain.Tests
         [SetUp]
         public void SetUp()
         {
-            _arena = new RectangleArena(3, 4, new Random(0));
+            _arena = new RectangleArena(3, 4, new RandomSource(0));
             _state = new GameStateService();
             var time = TestClock.Create(_state);
             _player = new PlayerService(new Player(1, _start), _arena, new AttackService(time, _state), time);
             _logger = new RecordingLogger();
-            _coins = new CoinService(_logger, _arena, _player, _state, new Random(0));
+            _coins = new CoinService(_logger, _arena, _player, _state, new RandomSource(0));
             _created = new List<Coin>();
             _coins.OnCoinCreated += _created.Add;
             _state.TransitionTo(GameState.Gameplay);
@@ -104,6 +104,28 @@ namespace Domain.Tests
 
             Assert.AreEqual(0, _coins.CoinCount);
             CollectionAssert.AreEqual(new[] { coin }, removed, "the removed coin is reported, so its visual can go");
+        }
+
+        [Test]
+        public void CreateCoin_WithTheSameSeed_PicksTheSameTiles()
+        {
+            List<GridPosition> Positions(int seed)
+            {
+                var state = new GameStateService();
+                var arena = new RectangleArena(3, 4, new RandomSource(seed));
+                var time = TestClock.Create(state);
+                var player = new PlayerService(new Player(1, _start), arena, new AttackService(time, state), time);
+                var coins = new CoinService(new RecordingLogger(), arena, player, state, new RandomSource(seed));
+                var created = new List<GridPosition>();
+                coins.OnCoinCreated += coin => created.Add(coin.Position);
+                state.TransitionTo(GameState.Gameplay);
+                for (int i = 0; i < 20; i++) coins.CreateCoinAtRandomPosition(0);
+                return created;
+            }
+
+            var first = Positions(5);
+            Assert.AreEqual(20, first.Count);
+            CollectionAssert.AreEqual(first, Positions(5));
         }
     }
 }
