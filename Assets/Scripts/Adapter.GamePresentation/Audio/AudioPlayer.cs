@@ -1,3 +1,4 @@
+using Domain.Models;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,12 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private bool logSuppressedSounds = false;
 
     private readonly Dictionary<AudioEvent, float> _lastPlayTimes = new();
+    private RandomSource _cosmeticRandom;
+
+    public void Initialize(RandomSource cosmeticRandom)
+    {
+        _cosmeticRandom = cosmeticRandom;
+    }
     private readonly Dictionary<AudioEvent, Queue<AudioSource>> _pools = new();
 
     public void Play(AudioEvent audioEvent)
@@ -80,10 +87,7 @@ public class AudioPlayer : MonoBehaviour
     {
         source.clip = PickClip(audioEvent);
         source.volume = audioEvent.volume;
-        source.pitch = Random.Range(
-            audioEvent.pitchRange.x,
-            audioEvent.pitchRange.y
-        );
+        source.pitch = _cosmeticRandom.Range(audioEvent.pitchRange.x, audioEvent.pitchRange.y);
         source.outputAudioMixerGroup = audioEvent.mixerGroup;
     }
 
@@ -95,6 +99,6 @@ public class AudioPlayer : MonoBehaviour
         if (audioEvent.clips.Length == 1)
             return audioEvent.clips[0];
 
-        return audioEvent.clips[Random.Range(0, audioEvent.clips.Length)];
+        return _cosmeticRandom.Pick(audioEvent.clips);
     }
 }

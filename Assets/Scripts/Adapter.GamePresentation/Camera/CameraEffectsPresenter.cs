@@ -1,3 +1,4 @@
+using Domain.Models;
 using UnityEngine;
 public class CameraEffectsPresenter : MonoBehaviour
 {
@@ -17,6 +18,12 @@ public class CameraEffectsPresenter : MonoBehaviour
     private float _zoomElapsed;
     private bool _isZooming;
     private bool _isZoomingIn;
+    private RandomSource _cosmeticRandom;
+
+    public void Initialize(RandomSource cosmeticRandom)
+    {
+        _cosmeticRandom = cosmeticRandom;
+    }
 
     private void Start()
     {
@@ -61,8 +68,8 @@ public class CameraEffectsPresenter : MonoBehaviour
         if (_shakeElapsed < _shakeDuration)
         {
             _shakeElapsed += Time.unscaledDeltaTime;
-            float x = Random.Range(-1f, 1f) * _shakeMagnitude;
-            float y = Random.Range(-1f, 1f) * _shakeMagnitude;
+            float x = _cosmeticRandom.Range(-1f, 1f) * _shakeMagnitude;
+            float y = _cosmeticRandom.Range(-1f, 1f) * _shakeMagnitude;
             _camera.transform.localPosition = _originalPosition + new Vector3(x, y, 0f);
 
             if (_shakeElapsed >= _shakeDuration)

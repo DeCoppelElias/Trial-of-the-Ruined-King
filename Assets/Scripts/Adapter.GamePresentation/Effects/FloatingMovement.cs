@@ -1,3 +1,4 @@
+using Domain.Models;
 using UnityEngine;
 
 public class FloatingMovement : MonoBehaviour
@@ -14,16 +15,19 @@ public class FloatingMovement : MonoBehaviour
 
     private Vector3 _startPosition;
 
+    public void Initialize(RandomSource cosmeticRandom)
+    {
+        // Random offset to desynchronize multiple floating objects
+        _randomOffset = new Vector3(
+            cosmeticRandom.Range(0f, 2f),
+            cosmeticRandom.Range(0f, 2f),
+            cosmeticRandom.Range(0f, 2f)
+        );
+    }
+
     private void Start()
     {
         _startPosition = transform.localPosition;
-        
-        // Random offset to desynchronize multiple floating objects
-        _randomOffset = new Vector3(
-            Random.Range(0f, 2),
-            Random.Range(0f, 2),
-            Random.Range(0f, 2)
-        );
     }
 
     private void Update()

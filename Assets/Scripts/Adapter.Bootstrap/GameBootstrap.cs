@@ -50,9 +50,15 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private int _arenaHeight = 4;
     [SerializeField] private Vector3 _arenaPosition = new (-1, 0, -2);
 
+    [Header("Randomness")]
+    [Tooltip("Replay a run: copy its seed from the console, tick this and paste the seed below.")]
+    [SerializeField] private bool _useFixedSeed;
+    [SerializeField] private int _fixedSeed;
+
+    private readonly RandomSource _runRandom = new RandomSource(RandomSource.NewSeed());
+    private readonly RandomSource _cosmeticRandom = new RandomSource(RandomSource.NewSeed());
     private RectangleArena _arena;
     private ArenaSpace _arenaSpace;
-    private readonly RandomSource _runRandom = new RandomSource(RandomSource.NewSeed());
     private ITimeService _timeService;
     private AttackService _attackService;
     private PlayerService _playerService;
@@ -72,6 +78,11 @@ public class GameBootstrap : MonoBehaviour
         _logger = new UnityLogger();
 
         _gameStateService = new GameStateService();
+
+        // Built before anything else subscribes to OnStateChanged, so each run is
+        // reseeded before any roll. See docs/adr/randomness.md.
+        new RunSeeder(_gameStateService, _runRandom, _logger, _useFixedSeed ? _fixedSeed : (int?)null);
+
         _arena = new RectangleArena(_arenaWidth, _arenaHeight, _runRandom);
         _arenaSpace = new ArenaSpace(_arenaPosition);
         _player = new Player(1, GetMiddleGridPosition(), _logger);
@@ -81,12 +92,17 @@ public class GameBootstrap : MonoBehaviour
         InitializePlayerComponents();
         InitializeCoinComponents();
 
+        _audioPlayer.Initialize(_cosmeticRandom);
+        _cameraEffectsPresenter.Initialize(_cosmeticRandom);
+        foreach (var floating in FindObjectsByType<FloatingMovement>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            floating.Initialize(_cosmeticRandom);
+
         _domainUpdater.Initialize(_timeService);
         _tileVisualizer.Initialize(_arena, _arenaSpace, _arenaPresenter);
         _attackPresenter.Initialize(_attackService, _arenaSpace);
         _arenaPresenter.Initialize(_arena, _arenaSpace, _gameStateService);
         _playerHitPresenter.Initialize(_timeService, _playerService);
-        _arenaShaker.Initialize(_timeService);
+        _arenaShaker.Initialize(_timeService, _cosmeticRandom);
         _playerAttacker.Initialize(_attackService, _arena, _timeService, _gameStateService, _runRandom);
         _playerPresenter.Initialize(_player, _arena, _arenaSpace, _playerPrefab, _arenaPresenter, _gameStateService, _timeService, _playerService);
         _playerPresenter.OnPlayerSpawned += OnPlayerSpawned;
@@ -149,7 +165,7 @@ public class GameBootstrap : MonoBehaviour
         _coinService = new CoinService(_logger, _arena, _playerService, _gameStateService, _runRandom);
 
         _coinCreator.Initialize(_coinService, _gameStateService);
-        _coinsPresenter.Initialize(_arenaSpace, _audioPlayer);
+        _coinsPresenter.Initialize(_arenaSpace, _audioPlayer, _cosmeticRandom);
 
         _coinService.OnCoinCreated += _coinsPresenter.HandleCoinCreated;
         _coinService.OnCoinRemoved += _coinsPresenter.HandleCoinRemoved;
