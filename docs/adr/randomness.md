@@ -3,8 +3,9 @@
 Every roll in the game comes from a `RandomSource`, a plain class in
 `Domain.Models` that wraps one `System.Random` and adds the helpers the game
 needs: int and float ranges, a value from 0 to 1, a coin flip, a pick from a
-list, and `Reseed`. Nothing calls `UnityEngine.Random`, and a test fails if
-any code under `Assets/Scripts` does. The domain cannot reference Unity, and
+list, and `Reseed`. The game uses only `System.Random` and never calls
+`UnityEngine.Random`. This is a rule for review, with no test to enforce it.
+The domain cannot reference Unity, and
 `UnityEngine.Random` is one global state that any package can draw from, so
 one library for both sides keeps every roll owned by whoever holds it.
 
