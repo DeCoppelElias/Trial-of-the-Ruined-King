@@ -6,10 +6,12 @@ using UnityEngine;
 public class HammerAttackFactory : IAttackFactory
 {
     private readonly IArena _arena;
+    private readonly RandomSource _runRandom;
 
-    public HammerAttackFactory(IArena arena)
+    public HammerAttackFactory(IArena arena, RandomSource runRandom)
     {
         _arena = arena;
+        _runRandom = runRandom;
     }
 
     public Attack CreateRandomAttack(AttackDefinitionBase definition, float attackTimingMultiplier, IReadOnlyCollection<GridPosition> occupiedTiles, float minFreePercentage)
@@ -18,7 +20,7 @@ public class HammerAttackFactory : IAttackFactory
         if (availablePositions.Count == 0)
             return null;
 
-        var selectedPosition = availablePositions[Random.Range(0, availablePositions.Count)];
+        var selectedPosition = _runRandom.Pick(availablePositions);
         HorizontalDirection direction = selectedPosition.GridX == 0
             ? HorizontalDirection.LeftToRight
             : HorizontalDirection.RightToLeft;

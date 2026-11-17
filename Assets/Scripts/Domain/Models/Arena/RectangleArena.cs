@@ -11,9 +11,9 @@ namespace Domain.Models
         public event Action OnArenaChanged;
 
         private TileType[,] _tiles;
-        private readonly Random _random;
+        private readonly RandomSource _random;
 
-        public RectangleArena(int width, int height, Random random)
+        public RectangleArena(int width, int height, RandomSource random)
         {
             Width = width;
             Height = height;
@@ -82,8 +82,7 @@ namespace Domain.Models
                 return null;
             }
 
-            int randomIndex = _random.Next(0, emptyPositions.Count);
-            return emptyPositions[randomIndex];
+            return _random.Pick(emptyPositions);
         }
     }
 }

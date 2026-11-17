@@ -12,19 +12,24 @@ public class CoinsPresenter : MonoBehaviour
     private GameObject _coinInstance;
     private ArenaSpace _arenaSpace;
     private AudioPlayer _audioPlayer;
+    private RandomSource _cosmeticRandom;
     
-    public void Initialize(ArenaSpace arenaSpace, AudioPlayer audioPlayer)
+    public void Initialize(ArenaSpace arenaSpace, AudioPlayer audioPlayer, RandomSource cosmeticRandom)
     {
         _arenaSpace = arenaSpace;
         _audioPlayer = audioPlayer;
+        _cosmeticRandom = cosmeticRandom;
     }
 
     public void HandleCoinCreated(Coin coin)
     {
         var worldPosition = _arenaSpace.GridToWorld(coin.Position);
-        var rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+        var rotation = Quaternion.Euler(0, _cosmeticRandom.Range(0f, 360f), 0);
         _coinInstance = Instantiate(_coinPrefab, worldPosition + new Vector3(0, 0.2f, 0), rotation, _coinContainer);
-        _coinInstance.transform.localScale = new Vector3(Random.Range(0.8f, 1.2f), Random.Range(0.8f, 1.2f), Random.Range(0.8f, 1.2f));
+        _coinInstance.transform.localScale = new Vector3(
+            _cosmeticRandom.Range(0.8f, 1.2f),
+            _cosmeticRandom.Range(0.8f, 1.2f),
+            _cosmeticRandom.Range(0.8f, 1.2f));
 
         StartCoroutine(FadeInCoin(_coinInstance));
     }

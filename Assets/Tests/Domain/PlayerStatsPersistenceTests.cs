@@ -14,7 +14,7 @@ namespace Domain.Tests
         [SetUp]
         public void SetUp()
         {
-            var arena = new RectangleArena(3, 4, new System.Random(0));
+            var arena = new RectangleArena(3, 4, new RandomSource(0));
             var state = new GameStateService();
             var time = TestClock.Create(state);
             _player = new PlayerService(new Player(1, new GridPosition(1, 1)), arena, new AttackService(time, state), time);

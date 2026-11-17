@@ -6,10 +6,12 @@ using UnityEngine;
 public class SpearColumnAttackFactory : IAttackFactory
 {
     private readonly IArena _arena;
+    private readonly RandomSource _runRandom;
 
-    public SpearColumnAttackFactory(IArena arena)
+    public SpearColumnAttackFactory(IArena arena, RandomSource runRandom)
     {
         _arena = arena;
+        _runRandom = runRandom;
     }
 
     public Attack CreateRandomAttack(AttackDefinitionBase definition, float attackTimingMultiplier, IReadOnlyCollection<GridPosition> occupiedTiles, float minFreePercentage)
@@ -18,8 +20,8 @@ public class SpearColumnAttackFactory : IAttackFactory
         if (availableColumns.Count == 0)
             return null;
 
-        int randomColumn = availableColumns[Random.Range(0, availableColumns.Count)];
-        VerticalDirection direction = Random.value < 0.5f
+        int randomColumn = _runRandom.Pick(availableColumns);
+        VerticalDirection direction = _runRandom.CoinFlip()
             ? VerticalDirection.BottomToTop
             : VerticalDirection.TopToBottom;
 

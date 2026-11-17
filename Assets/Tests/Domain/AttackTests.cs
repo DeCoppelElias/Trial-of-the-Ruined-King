@@ -13,7 +13,7 @@ namespace Domain.Tests
         [SetUp]
         public void SetUp()
         {
-            _arena = new RectangleArena(3, 4, new System.Random(0));
+            _arena = new RectangleArena(3, 4, new RandomSource(0));
         }
 
         // Each stage lasts one second, so one tick of one second moves to the next stage.

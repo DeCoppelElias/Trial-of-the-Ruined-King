@@ -12,6 +12,8 @@ A survival dodging game where the player dodges endless waves of escalating atta
 - `docs/ideas/` what is wanted and not decided. A new idea goes here without
   asking, in the format its README gives.
 - `docs/roadmap/` the committed build order, listed in its README.
+- `.plans/` implementation plans for an entry, one file each. It is gitignored,
+  so a plan is working material and never a document.
 
 `README.md` is for players and visitors to the repo. Agent information never
 goes there. Each document says at its top what it holds and never holds. When you are not
@@ -59,6 +61,10 @@ starts `relay_win.exe`, which outlives Unity and keeps its output pipe open, so
 a shell that pipes or captures Unity's output never returns. In PowerShell,
 start Unity with `Start-Process -PassThru`, call `WaitForExit()` on the result,
 then stop any `relay_win` process left behind.
+
+`tools/run-tests.ps1` does all of this. It finds the editor through Unity
+Hub, runs one suite or both, prints the totals and every failure, and lists
+compile errors when no results come out. It exits 1 unless every suite passes.
 
 "The tests pass" means both suites pass in full. The
 [testing](docs/adr/testing.md) decision says what an entry must test.

@@ -12,7 +12,7 @@ namespace Domain.Services
         private readonly IPlayerService _playerService;
         private readonly IGameStateService _gameStateService;
         private readonly ILogger _logger;
-        private readonly Random _random;
+        private readonly RandomSource _random;
         private Coin _coin;
 
         public int CoinCount => _coin != null ? 1 : 0;
@@ -20,7 +20,7 @@ namespace Domain.Services
         public event Action<Coin> OnCoinCreated;
         public event Action<Coin> OnCoinRemoved;
 
-        public CoinService(ILogger logger, IArena arena, IPlayerService playerService, IGameStateService gameStateService, Random random)
+        public CoinService(ILogger logger, IArena arena, IPlayerService playerService, IGameStateService gameStateService, RandomSource random)
         {
             _random = random ?? throw new ArgumentNullException(nameof(random));
             _arena = arena;
@@ -49,10 +49,7 @@ namespace Domain.Services
                 return;
             }
 
-            var randomIndex = _random.Next(0, validPositions.Count);
-            var randomPosition = validPositions[randomIndex];
-
-            _coin = new Coin(randomPosition);
+            _coin = new Coin(_random.Pick(validPositions));
             OnCoinCreated?.Invoke(_coin);
         }
 

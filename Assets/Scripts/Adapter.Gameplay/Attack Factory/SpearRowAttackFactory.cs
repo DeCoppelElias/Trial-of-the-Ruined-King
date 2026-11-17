@@ -6,10 +6,12 @@ using UnityEngine;
 public class SpearRowAttackFactory : IAttackFactory
 {
     private readonly IArena _arena;
+    private readonly RandomSource _runRandom;
 
-    public SpearRowAttackFactory(IArena arena)
+    public SpearRowAttackFactory(IArena arena, RandomSource runRandom)
     {
         _arena = arena;
+        _runRandom = runRandom;
     }
 
     public Attack CreateRandomAttack(AttackDefinitionBase definition, float attackTimingMultiplier, IReadOnlyCollection<GridPosition> occupiedTiles, float minFreePercentage)
@@ -18,8 +20,8 @@ public class SpearRowAttackFactory : IAttackFactory
         if (availableRows.Count == 0)
             return null;
 
-        int randomRow = availableRows[Random.Range(0, availableRows.Count)];
-        HorizontalDirection direction = Random.value < 0.5f
+        int randomRow = _runRandom.Pick(availableRows);
+        HorizontalDirection direction = _runRandom.CoinFlip()
             ? HorizontalDirection.LeftToRight
             : HorizontalDirection.RightToLeft;
 

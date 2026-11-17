@@ -1,6 +1,6 @@
 # Randomness
 
-Status: planned, see the [roadmap entry](../roadmap/randomness.md).
+Status: built, see the [randomness](../adr/randomness.md) decision.
 
 ## What it does
 
@@ -28,5 +28,4 @@ the composition root.
 
 ## Open questions
 
-- One source for gameplay and a separate one for cosmetics?
-- Is it a port the domain asks for, or a plain class the domain owns?
+Settled by the [randomness](../adr/randomness.md) decision.

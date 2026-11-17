@@ -26,6 +26,9 @@ _Avoid_: cell, square
 One attempt, from its start until the player dies or quits.
 _Avoid_: game, round, session
 
+**Seed**:
+The number a run's rolls come from. Two runs with the same seed get the same attacks and coins, given the same inputs.
+
 **Difficulty**:
 How hard the run is at the moment. It rises over the course of a run.
 
