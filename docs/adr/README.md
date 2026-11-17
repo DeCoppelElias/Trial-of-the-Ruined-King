@@ -22,6 +22,7 @@ Architecture:
 
 - [Ports and adapters](ports-and-adapters.md): a Unity-free domain, driving and driven ports, adapters that never reference each other.
 - [Game clock](game-clock.md): the domain owns game time, holds for pauses and speed, fixed steps, game time or real time stated for every timer.
+- [Randomness](randomness.md): one `RandomSource` class, a seeded instance for gameplay reseeded each run, a separate one for cosmetics, no `UnityEngine.Random`.
 - [Testing](testing.md): EditMode tests for every domain rule, one PlayMode smoke test, test assemblies that mirror the code.
 
 Tooling:
