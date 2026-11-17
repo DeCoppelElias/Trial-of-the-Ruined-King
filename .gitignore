@@ -100,3 +100,6 @@ InitTestScene*.unity*
 
 # Unity Version Control workspace, no longer used
 .plastic/
+
+# Implementation plans, see AGENTS.md
+.plans/

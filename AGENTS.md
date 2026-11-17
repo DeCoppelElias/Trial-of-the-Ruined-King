@@ -12,6 +12,8 @@ A survival dodging game where the player dodges endless waves of escalating atta
 - `docs/ideas/` what is wanted and not decided. A new idea goes here without
   asking, in the format its README gives.
 - `docs/roadmap/` the committed build order, listed in its README.
+- `.plans/` implementation plans for an entry, one file each. It is gitignored,
+  so a plan is working material and never a document.
 
 `README.md` is for players and visitors to the repo. Agent information never
 goes there. Each document says at its top what it holds and never holds. When you are not
